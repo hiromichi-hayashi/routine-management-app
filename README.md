@@ -50,7 +50,7 @@ DB_PASSWORD=password
 [routine-management-app] $ nvm install && nvm use
 
 # node パッケージをインストール
-[routine-management-app] $ npm ci
+[routine-management-app] $ sail npm ci
 
 # vite を起動
 [routine-management-app] $ npm run dev
