@@ -50,7 +50,7 @@ DB_PASSWORD=password
 [routine-management-app] $ sail npm ci
 
 # vite を起動
-[routine-management-app] $ npm run dev
+[routine-management-app] $ sail npm run dev
 ```
 
 4. http://localhost:8080 にアクセス
