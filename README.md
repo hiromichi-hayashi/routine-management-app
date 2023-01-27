@@ -46,14 +46,11 @@ DB_PASSWORD=password
 3. JS をセットアップ
 
 ```zsh
-# node バージョンを統一するように
-[routine-management-app] $ nvm install && nvm use
-
 # node パッケージをインストール
 [routine-management-app] $ npm ci
 
 # vite を起動
-[routine-management-app] $ npm run dev
+[routine-management-app] $ sail npm run dev
 ```
 
 4. http://localhost:8080 にアクセス
