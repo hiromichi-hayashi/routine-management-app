@@ -30,7 +30,7 @@
 
 # .env ファイルを準備
 [routine-management-app] $ cp .env.example .env
-[routine-management-app] $ php artisan key:generate
+[routine-management-app] $ sail php artisan key:generate
 
 # .envと.env.testingの修正
 ## .env
@@ -46,11 +46,8 @@ DB_PASSWORD=password
 3. JS をセットアップ
 
 ```zsh
-# node バージョンを統一するように
-[routine-management-app] $ nvm install && nvm use
-
 # node パッケージをインストール
-[routine-management-app] $ npm ci
+[routine-management-app] $ sail npm ci
 
 # vite を起動
 [routine-management-app] $ npm run dev
