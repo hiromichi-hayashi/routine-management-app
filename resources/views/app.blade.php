@@ -3,11 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
+
+        <title inertia>Laravel</title>
+
+        <!-- Scripts -->
         @viteReactRefresh
-        @vite('resources/ts/app.tsx')
+        @vite('resources/js/app.jsx')
+        @inertiaHead
     </head>
     <body>
-        <div id="app"></div>
+        @inertia
     </body>
 </html>
