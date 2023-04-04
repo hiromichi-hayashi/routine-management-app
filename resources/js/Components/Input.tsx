@@ -1,20 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react'
 
 interface InputProps {
-    type: string;
-    name: string;
-    value: string | number;
-    max?: number;
-    className?: string;
-    autoComplete?: string;
-    required?: boolean;
-    isFocused?: boolean;
-    handleChange: React.ChangeEventHandler<HTMLInputElement>;
+    type: string
+    name: string
+    placeholder?: string
+    value: string | number
+    max?: number
+    className?: string
+    autoComplete?: string
+    required?: boolean
+    isFocused?: boolean
+    handleChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
 export default function Input({
     type = 'text',
     name,
+    placeholder,
     value,
     max,
     className,
@@ -23,13 +25,13 @@ export default function Input({
     isFocused,
     handleChange,
 }: InputProps) {
-    const input = useRef<HTMLInputElement>(null);
+    const input = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         if (isFocused) {
-            input.current?.focus();
+            input.current?.focus()
         }
-    }, []);
+    }, [])
 
     return (
         <div className="flex flex-col items-start">
@@ -38,6 +40,7 @@ export default function Input({
                 name={name}
                 value={value}
                 max={max}
+                placeholder={placeholder}
                 className={
                     `border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ` +
                     className
@@ -48,5 +51,5 @@ export default function Input({
                 onChange={(e) => handleChange(e)}
             />
         </div>
-    );
+    )
 }
