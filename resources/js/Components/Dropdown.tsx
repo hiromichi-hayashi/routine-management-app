@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Link } from '@inertiajs/inertia-react'
+import Link from '@/Components/Link'
 import { Transition } from '@headlessui/react'
 
 interface ContextType {
@@ -98,10 +98,7 @@ const Content = ({
                         onClick={() => setOpen(false)}
                     >
                         <div
-                            className={
-                                `rounded-md ring-1 ring-black ring-opacity-5 ` +
-                                contentClasses
-                            }
+                            className={`rounded-md ring-1 ring-black ring-opacity-5 ${contentClasses}`}
                         >
                             {children}
                         </div>
@@ -117,18 +114,31 @@ const DropdownLink = ({
     method = 'post',
     as = 'a',
     children,
-}: DropdownLinkProps) => {
-    return (
-        <Link
-            method={method}
-            as={as}
-            href={href}
-            className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-        >
-            {children}
-        </Link>
-    )
-}
+}: DropdownLinkProps) => (
+    <Link
+        method={method}
+        as={as}
+        href={href}
+        className={[
+            'block',
+            'w-full',
+            'px-4',
+            'py-2',
+            'text-left',
+            'text-sm',
+            'leading-5',
+            'text-gray-700',
+            'hover:bg-gray-100',
+            'focus:outline-none',
+            'focus:bg-gray-100',
+            'transition',
+            'duration-150',
+            'ease-in-out',
+        ].join(' ')}
+    >
+        {children}
+    </Link>
+)
 
 Dropdown.Trigger = Trigger
 Dropdown.Content = Content

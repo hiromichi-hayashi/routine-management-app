@@ -26,7 +26,7 @@ export default function Link({
         <InertiaLink
             as={as}
             method={method}
-            href={route(href)}
+            href={href === '/' ? (href = '/') : route(href)}
             className={[
                 underline && 'underline',
                 fontSize,

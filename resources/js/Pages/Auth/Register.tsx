@@ -3,8 +3,9 @@ import Button from '@/Components/Button'
 import Guest from '@/Layouts/Guest'
 import Input from '@/Components/Input'
 import Label from '@/Components/Label'
+import Link from '@/Components/Link'
 import ValidationErrors from '@/Components/ValidationErrors'
-import { Link, useForm } from '@inertiajs/inertia-react'
+import { useForm } from '@inertiajs/inertia-react'
 import { Head } from '@inertiajs/react'
 
 export default function Register() {
@@ -103,12 +104,7 @@ export default function Register() {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900"
-                    >
-                        ログインはこちら
-                    </Link>
+                    <Link href="login">ログインはこちら</Link>
 
                     <Button
                         className="ml-4 bg-gray-900"

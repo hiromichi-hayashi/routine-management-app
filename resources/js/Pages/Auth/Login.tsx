@@ -4,8 +4,9 @@ import Checkbox from '@/Components/Checkbox'
 import Guest from '@/Layouts/Guest'
 import Input from '@/Components/Input'
 import Label from '@/Components/Label'
+import Link from '@/Components/Link'
 import ValidationErrors from '@/Components/ValidationErrors'
-import { Link, useForm } from '@inertiajs/inertia-react'
+import { useForm } from '@inertiajs/inertia-react'
 import { Head } from '@inertiajs/react'
 
 export default function Login() {
@@ -43,12 +44,7 @@ export default function Login() {
             <ValidationErrors errors={errors} />
 
             <div className="text-right">
-                <Link
-                    href={route('register')}
-                    className="underline mb-2 text-sm text-gray-600 hover:text-gray-900"
-                >
-                    新規登録はこちら
-                </Link>
+                <Link href="register">新規登録はこちら</Link>
             </div>
 
             <form onSubmit={submit}>
@@ -93,20 +89,16 @@ export default function Login() {
                     </label>
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('password.request')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900"
-                    >
+                <div className="grid items-center justify-center mt-4">
+                    <div className="m-auto mt-10">
+                        <Button className="block w-40" processing={processing}>
+                            ログイン
+                        </Button>
+                    </div>
+
+                    <Link href="password.request" className="mt-4">
                         パスワードを忘れた方はこちら
                     </Link>
-
-                    <Button
-                        className="ml-4 bg-gray-900"
-                        processing={processing}
-                    >
-                        ログイン
-                    </Button>
                 </div>
             </form>
         </Guest>

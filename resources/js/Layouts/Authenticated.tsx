@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
-import { Link } from '@inertiajs/inertia-react'
+import Link from '@/Components/Link'
 
 interface Props {
     auth: any
@@ -21,7 +21,13 @@ export default function Authenticated({ auth, header, children }: Props) {
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/">Laravel</Link>
+                                <Link
+                                    href="/"
+                                    fontSize="text-xl"
+                                    underline={false}
+                                >
+                                    Laravel
+                                </Link>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -63,7 +69,7 @@ export default function Authenticated({ auth, header, children }: Props) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link
-                                            href={route('logout')}
+                                            href="logout"
                                             method="post"
                                             as="button"
                                         >

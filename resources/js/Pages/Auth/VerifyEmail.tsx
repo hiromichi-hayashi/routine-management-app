@@ -1,7 +1,8 @@
 import React from 'react'
 import Button from '@/Components/Button'
 import Guest from '@/Layouts/Guest'
-import { Link, useForm } from '@inertiajs/inertia-react'
+import Link from '@/Components/Link'
+import { useForm } from '@inertiajs/inertia-react'
 import { Head } from '@inertiajs/react'
 
 interface Props {
@@ -39,7 +40,7 @@ export default function VerifyEmail({ status }: Props) {
                     </Button>
 
                     <Link
-                        href={route('logout')}
+                        href="logout"
                         method="post"
                         as="button"
                         className="underline text-sm text-gray-600 hover:text-gray-900"
