@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import Button from '@/Components/Button'
 import Checkbox from '@/Components/Checkbox'
 import Guest from '@/Layouts/Guest'
@@ -6,21 +5,16 @@ import Input from '@/Components/Input'
 import Label from '@/Components/Label'
 import Link from '@/Components/Link'
 import ValidationErrors from '@/Components/ValidationErrors'
-import { useForm } from '@inertiajs/inertia-react'
-import { Head } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
 
 export default function Login() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, errors, reset } = useForm({
         email: '',
         password: '',
+        auth: '',
+        throttle: '',
         remember: false,
     })
-
-    useEffect(() => {
-        return () => {
-            reset('password')
-        }
-    }, [])
 
     const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(
@@ -35,13 +29,12 @@ export default function Login() {
         e.preventDefault()
 
         post(route('login'))
+        reset('password')
     }
 
     return (
         <Guest>
             <Head title="ログイン" />
-
-            <ValidationErrors errors={errors} />
 
             <div className="text-right">
                 <Link href="register">新規登録はこちら</Link>
@@ -49,21 +42,23 @@ export default function Login() {
 
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="email" value="Email" />
+                    <Label forInput="email" value="メールアドレス" />
 
                     <Input
-                        type="email"
+                        type="text"
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="email"
                         isFocused={true}
                         handleChange={onHandleChange}
+                        validation={errors.email || errors.auth}
+                        disabled={errors.throttle ? true : false}
                     />
                 </div>
 
                 <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                    <Label forInput="password" value="パスワード" />
 
                     <Input
                         type="password"
@@ -72,6 +67,8 @@ export default function Login() {
                         className="mt-1 block w-full"
                         autoComplete="current-password"
                         handleChange={onHandleChange}
+                        validation={errors.password || errors.auth}
+                        disabled={errors.throttle ? true : false}
                     />
                 </div>
 
@@ -88,15 +85,18 @@ export default function Login() {
                         </span>
                     </label>
                 </div>
+                {errors && <ValidationErrors errors={errors} />}
 
-                <div className="grid items-center justify-center mt-4">
-                    <div className="m-auto mt-10">
-                        <Button className="block w-40" processing={processing}>
-                            ログイン
-                        </Button>
-                    </div>
-
-                    <Link href="password.request" className="mt-4">
+                <div className="flex items-center justify-center mt-8">
+                    <Button
+                        disabled={errors.throttle ? true : false}
+                        className="block w-40"
+                    >
+                        ログイン
+                    </Button>
+                </div>
+                <div className="text-center mt-4">
+                    <Link href="password.request">
                         パスワードを忘れた方はこちら
                     </Link>
                 </div>
