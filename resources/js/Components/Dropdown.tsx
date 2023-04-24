@@ -24,6 +24,7 @@ type DropdownLinkProps = {
     method?: string
     as?: string
     children: React.ReactNode
+    underline?: boolean
 }
 
 const DropDownContext = React.createContext<ContextType>({} as ContextType)
@@ -114,11 +115,13 @@ const DropdownLink = ({
     method = 'post',
     as = 'a',
     children,
+    underline = true,
 }: DropdownLinkProps) => (
     <Link
         method={method}
         as={as}
         href={href}
+        underline={underline}
         className={[
             'block',
             'w-full',

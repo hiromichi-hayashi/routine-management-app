@@ -11,6 +11,8 @@ interface InputProps {
     required?: boolean
     isFocused?: boolean
     handleChange: React.ChangeEventHandler<HTMLInputElement>
+    validation: string | undefined
+    disabled?: boolean
 }
 
 export default function Input({
@@ -24,6 +26,8 @@ export default function Input({
     required,
     isFocused,
     handleChange,
+    validation,
+    disabled,
 }: InputProps) {
     const input = useRef<HTMLInputElement>(null)
 
@@ -40,11 +44,17 @@ export default function Input({
                 name={name}
                 value={value}
                 max={max}
+                disabled={disabled}
                 placeholder={placeholder}
-                className={
-                    `border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ` +
-                    className
-                }
+                className={[
+                    validation ? 'border-red-400' : 'border-gray-300',
+                    'focus:border-gray-500',
+                    'focus:ring-gray-500',
+                    'rounded-md',
+                    'shadow-sm ',
+                    disabled && ' bg-slate-200 text-gray-500',
+                    className,
+                ].join(' ')}
                 ref={input}
                 autoComplete={autoComplete}
                 required={required}

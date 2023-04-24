@@ -3,21 +3,22 @@ interface Props {
     className?: string
     bgColor?: string
     textColor?: string
-    processing: boolean
     children: React.ReactNode
+    disabled?: boolean
 }
 
 export default function Button({
     type = 'submit',
     className = '',
-    bgColor = 'bg-gray-900',
+    bgColor = 'bg-gray-900 hover:bg-gray-700',
     textColor = 'text-white',
-    processing,
     children,
+    disabled,
 }: Props) {
     return (
         <button
             type={type}
+            disabled={disabled}
             className={[
                 'items-center',
                 'px-4',
@@ -33,12 +34,10 @@ export default function Button({
                 'transition',
                 'ease-in-out',
                 'duration-150',
-                processing ? 'opacity-25' : '',
                 bgColor,
                 textColor,
                 className,
             ].join(' ')}
-            disabled={processing}
         >
             {children}
         </button>
