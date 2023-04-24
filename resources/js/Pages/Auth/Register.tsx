@@ -14,7 +14,7 @@ export default function Register() {
         password_confirmation: '',
     })
 
-    const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(
             event.target.name as 'email' | 'password' | 'name',
             event.target.type === 'checkbox'
@@ -48,7 +48,7 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="name"
                         isFocused={true}
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.name}
                     />
                 </div>
@@ -62,7 +62,7 @@ export default function Register() {
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.email}
                     />
                 </div>
@@ -76,7 +76,7 @@ export default function Register() {
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.password}
                     />
                 </div>
@@ -92,7 +92,7 @@ export default function Register() {
                         name="password_confirmation"
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.password_confirmation}
                     />
                 </div>

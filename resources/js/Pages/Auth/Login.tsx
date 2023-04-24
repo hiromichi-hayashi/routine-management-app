@@ -16,7 +16,7 @@ export default function Login() {
         remember: false,
     })
 
-    const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(
             event.target.name as 'email' | 'password' | 'remember',
             event.target.type === 'checkbox'
@@ -51,7 +51,7 @@ export default function Login() {
                         className="mt-1 block w-full"
                         autoComplete="email"
                         isFocused={true}
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.email || errors.auth}
                         disabled={errors.throttle ? true : false}
                     />
@@ -66,7 +66,7 @@ export default function Login() {
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="current-password"
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.password || errors.auth}
                         disabled={errors.throttle ? true : false}
                     />
@@ -76,8 +76,8 @@ export default function Login() {
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
-                            value={data.remember}
-                            handleChange={onHandleChange}
+                            checked={data.remember}
+                            handleChange={onChange}
                         />
 
                         <span className="ml-2 text-sm text-gray-600">

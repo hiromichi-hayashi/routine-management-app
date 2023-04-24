@@ -20,7 +20,7 @@ export default function ResetPassword({ token, email }: Props) {
         password_confirmation: '',
     })
 
-    const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(event.target.name as Name, event.target.value)
     }
 
@@ -45,7 +45,7 @@ export default function ResetPassword({ token, email }: Props) {
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.email}
                         disabled={true}
                     />
@@ -62,7 +62,7 @@ export default function ResetPassword({ token, email }: Props) {
                         placeholder="8文字以上の半角英数字"
                         autoComplete="new-password"
                         isFocused={true}
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.password}
                     />
                 </div>
@@ -79,7 +79,7 @@ export default function ResetPassword({ token, email }: Props) {
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
                         validation={errors.password_confirmation}
                     />
                 </div>
