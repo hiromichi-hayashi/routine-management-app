@@ -68,10 +68,16 @@ export default function Authenticated({ auth, header, children }: Props) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
+                                        <div className="px-4 py-4">
+                                            <div className="font-medium text-sm text-gray-500">
+                                                {auth.user.email}
+                                            </div>
+                                        </div>
                                         <Dropdown.Link
                                             href="logout"
                                             method="post"
                                             as="button"
+                                            underline={false}
                                         >
                                             ログアウト
                                         </Dropdown.Link>
@@ -131,7 +137,7 @@ export default function Authenticated({ auth, header, children }: Props) {
                 >
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
-                            href={route('dashboard')}
+                            href={'dashboard'}
                             active={route().current('dashboard')}
                         >
                             Dashboard
@@ -151,8 +157,9 @@ export default function Authenticated({ auth, header, children }: Props) {
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink
                                 method="post"
-                                href={route('logout')}
+                                href={'logout'}
                                 as="button"
+                                underline={false}
                             >
                                 ログアウト
                             </ResponsiveNavLink>
