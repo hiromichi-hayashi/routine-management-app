@@ -1,17 +1,18 @@
 interface Props {
     forInput: string
-    value: string
-    className?: string
-    children?: React.ReactNode
+    className?: string | undefined
+    children: React.ReactNode
 }
 
-export default function Label({ forInput, value, className, children }: Props) {
+export default function Label({ forInput, className, children }: Props) {
     return (
         <label
             htmlFor={forInput}
-            className={`block font-medium text-sm text-gray-700 ${className}`}
+            className={`block font-medium text-sm text-gray-700 ${
+                className !== undefined ? className : ''
+            }`}
         >
-            {value ? value : children}
+            {children}
         </label>
     )
 }

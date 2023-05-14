@@ -5,6 +5,7 @@ import Label from '@/Components/Label'
 import Link from '@/Components/Link'
 import ValidationErrors from '@/Components/ValidationErrors'
 import { Head, useForm } from '@inertiajs/react'
+import route from 'ziggy-js'
 
 export default function Register() {
     const { data, setData, post, errors, reset } = useForm({
@@ -17,9 +18,7 @@ export default function Register() {
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(
             event.target.name as 'email' | 'password' | 'name',
-            event.target.type === 'checkbox'
-                ? event.target.checked + ''
-                : event.target.value
+            event.target.value
         )
     }
 
@@ -39,7 +38,7 @@ export default function Register() {
             </div>
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="name" value="ユーザー名" />
+                    <Label forInput="name">ユーザー名</Label>
 
                     <Input
                         type="text"
@@ -53,11 +52,13 @@ export default function Register() {
                     />
                 </div>
 
+                {errors && <ValidationErrors errors={errors.name} />}
+
                 <div className="mt-4">
-                    <Label forInput="email" value="メールアドレス" />
+                    <Label forInput="email">メールアドレス</Label>
 
                     <Input
-                        type="email"
+                        type="text"
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
@@ -67,8 +68,10 @@ export default function Register() {
                     />
                 </div>
 
+                {errors && <ValidationErrors errors={errors.email} />}
+
                 <div className="mt-4">
-                    <Label forInput="password" value="パスワード" />
+                    <Label forInput="password">パスワード</Label>
 
                     <Input
                         type="password"
@@ -81,11 +84,12 @@ export default function Register() {
                     />
                 </div>
 
+                {errors && <ValidationErrors errors={errors.password} />}
+
                 <div className="mt-4">
-                    <Label
-                        forInput="password_confirmation"
-                        value="パスワード(確認用)"
-                    />
+                    <Label forInput="password_confirmation">
+                        パスワード(確認用)
+                    </Label>
 
                     <Input
                         type="password"
@@ -96,8 +100,9 @@ export default function Register() {
                         validation={errors.password_confirmation}
                     />
                 </div>
-
-                {errors && <ValidationErrors errors={errors} />}
+                {errors && (
+                    <ValidationErrors errors={errors.password_confirmation} />
+                )}
 
                 <div className="flex items-center justify-center mt-8 mb-3">
                     <Button className="block w-40">新規登録</Button>

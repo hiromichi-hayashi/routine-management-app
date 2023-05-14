@@ -1,15 +1,15 @@
 interface Props {
     name: string
-    value: any
+    checked: boolean
     handleChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
-export default function Checkbox({ name, value, handleChange }: Props) {
+export default function Checkbox({ name, checked, handleChange }: Props) {
     return (
         <input
             type="checkbox"
             name={name}
-            value={value}
+            checked={checked}
             className={[
                 'rounded',
                 'border-gray-300',

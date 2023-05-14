@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
 import Link from '@/Components/Link'
+import { useState, useContext, createContext } from 'react'
 import { Transition } from '@headlessui/react'
 
 interface ContextType {
@@ -21,13 +21,13 @@ type ContentProps = {
 
 type DropdownLinkProps = {
     href: string
-    method?: string
+    method?: 'get' | 'post' | 'put' | 'patch' | 'delete'
     as?: string
     children: React.ReactNode
     underline?: boolean
 }
 
-const DropDownContext = React.createContext<ContextType>({} as ContextType)
+const DropDownContext = createContext<ContextType>({} as ContextType)
 
 const Dropdown = ({ children }: Children) => {
     const [open, setOpen] = useState(false)

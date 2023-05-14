@@ -1,7 +1,7 @@
 import Link from '@/Components/Link'
 
 interface Props {
-    method?: string
+    method?: 'get' | 'post' | 'put' | 'patch' | 'delete'
     as?: string
     href: string
     active?: boolean

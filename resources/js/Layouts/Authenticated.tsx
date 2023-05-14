@@ -3,14 +3,22 @@ import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 import Link from '@/Components/Link'
+import route from 'ziggy-js'
 
 interface Props {
-    auth: any
+    user: {
+        created_at: string
+        email: string
+        email_verified_at?: string
+        id: number
+        name: string
+        updated_at: string
+    }
     header: React.ReactNode
     children: React.ReactNode
 }
 
-export default function Authenticated({ auth, header, children }: Props) {
+export default function Authenticated({ user, header, children }: Props) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false)
 
@@ -49,7 +57,7 @@ export default function Authenticated({ auth, header, children }: Props) {
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {auth.user.name}
+                                                {user?.name}
 
                                                 <svg
                                                     className="ml-2 -mr-0.5 h-4 w-4"
@@ -70,7 +78,7 @@ export default function Authenticated({ auth, header, children }: Props) {
                                     <Dropdown.Content>
                                         <div className="px-4 py-4">
                                             <div className="font-medium text-sm text-gray-500">
-                                                {auth.user.email}
+                                                {user?.email}
                                             </div>
                                         </div>
                                         <Dropdown.Link
@@ -147,10 +155,10 @@ export default function Authenticated({ auth, header, children }: Props) {
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800">
-                                {auth.user.name}
+                                {user?.name}
                             </div>
                             <div className="font-medium text-sm text-gray-500">
-                                {auth.user.email}
+                                {user?.email}
                             </div>
                         </div>
 

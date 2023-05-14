@@ -1,10 +1,11 @@
 import { Link as InertiaLink } from '@inertiajs/inertia-react'
+import route from 'ziggy-js'
 
 interface Props {
     as?: string
     href: string
     data?: object
-    method?: string
+    method?: 'get' | 'post' | 'put' | 'patch' | 'delete'
     className?: string
     children: React.ReactNode
     textColor?: string
@@ -14,23 +15,25 @@ interface Props {
 
 export default function Link({
     as,
-    className = '',
+    className,
     href,
     method,
     children,
-    textColor = 'text-gray-600 hover:text-gray-900',
-    underline = true,
-    fontSize = 'text-sm',
+    textColor,
+    underline,
+    fontSize,
 }: Props) {
+    const sendHref: string = href === '/' ? href : route(href)
+
     return (
         <InertiaLink
             as={as}
             method={method}
-            href={href === '/' ? (href = '/') : route(href)}
+            href={sendHref}
             className={[
                 underline && 'underline',
-                fontSize,
-                textColor,
+                fontSize ?? 'text-sm',
+                textColor ?? 'text-gray-600 hover:text-gray-900',
                 className,
             ].join(' ')}
         >

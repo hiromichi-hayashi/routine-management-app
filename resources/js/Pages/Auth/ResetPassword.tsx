@@ -4,6 +4,7 @@ import Input from '@/Components/Input'
 import Label from '@/Components/Label'
 import ValidationErrors from '@/Components/ValidationErrors'
 import { Head, useForm } from '@inertiajs/react'
+import route from 'ziggy-js'
 
 interface Props {
     token: string
@@ -14,8 +15,8 @@ type Name = 'email' | 'password' | 'password_confirmation' | 'token'
 
 export default function ResetPassword({ token, email }: Props) {
     const { data, setData, post, errors, reset } = useForm({
-        token: token,
-        email: email,
+        token,
+        email,
         password: '',
         password_confirmation: '',
     })
@@ -37,7 +38,7 @@ export default function ResetPassword({ token, email }: Props) {
 
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="email" value="メールアドレス" />
+                    <Label forInput="email">メールアドレス</Label>
 
                     <Input
                         type="email"
@@ -51,8 +52,10 @@ export default function ResetPassword({ token, email }: Props) {
                     />
                 </div>
 
+                <ValidationErrors errors={errors.email} />
+
                 <div className="mt-4">
-                    <Label forInput="password" value="新規パスワード" />
+                    <Label forInput="password">新規パスワード</Label>
 
                     <Input
                         type="password"
@@ -67,11 +70,12 @@ export default function ResetPassword({ token, email }: Props) {
                     />
                 </div>
 
+                <ValidationErrors errors={errors.password} />
+
                 <div className="mt-4">
-                    <Label
-                        forInput="password_confirmation"
-                        value="新規パスワード(確認用)"
-                    />
+                    <Label forInput="password_confirmation">
+                        新規パスワード(確認用)
+                    </Label>
 
                     <Input
                         type="password"
@@ -84,7 +88,7 @@ export default function ResetPassword({ token, email }: Props) {
                     />
                 </div>
 
-                <ValidationErrors errors={errors} />
+                <ValidationErrors errors={errors.password_confirmation} />
 
                 <div className="flex items-center justify-center mt-8 mb-3">
                     <Button className="block w-40">変更</Button>

@@ -4,6 +4,7 @@ import Input from '@/Components/Input'
 import Link from '@/Components/Link'
 import ValidationErrors from '@/Components/ValidationErrors'
 import { Head, useForm } from '@inertiajs/react'
+import route from 'ziggy-js'
 
 interface Props {
     status: string
@@ -21,7 +22,7 @@ export default function ForgotPassword({ status }: Props) {
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        post(route('password.email'))
+        post(route('password.email', data))
     }
 
     return (
@@ -51,7 +52,7 @@ export default function ForgotPassword({ status }: Props) {
                     </div>
                 )}
 
-                <ValidationErrors errors={errors} />
+                {errors && <ValidationErrors errors={errors.email} />}
 
                 <div className="flex items-center justify-center mt-4">
                     <Link href="login" textColor="text-white" underline={false}>

@@ -6,6 +6,7 @@ import Label from '@/Components/Label'
 import Link from '@/Components/Link'
 import ValidationErrors from '@/Components/ValidationErrors'
 import { Head, useForm } from '@inertiajs/react'
+import route from 'ziggy-js'
 
 export default function Login() {
     const { data, setData, post, errors, reset } = useForm({
@@ -42,7 +43,7 @@ export default function Login() {
 
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="email" value="メールアドレス" />
+                    <Label forInput="email">メールアドレス</Label>
 
                     <Input
                         type="text"
@@ -57,8 +58,10 @@ export default function Login() {
                     />
                 </div>
 
+                {errors && <ValidationErrors errors={errors.email} />}
+
                 <div className="mt-4">
-                    <Label forInput="password" value="パスワード" />
+                    <Label forInput="password">パスワード</Label>
 
                     <Input
                         type="password"
@@ -71,6 +74,8 @@ export default function Login() {
                         disabled={errors.throttle ? true : false}
                     />
                 </div>
+
+                {errors && <ValidationErrors errors={errors.password} />}
 
                 <div className="block mt-4">
                     <label className="flex items-center">
@@ -85,11 +90,15 @@ export default function Login() {
                         </span>
                     </label>
                 </div>
-                {errors && <ValidationErrors errors={errors} />}
+                {errors && errors.throttle ? (
+                    <ValidationErrors errors={errors.throttle} />
+                ) : (
+                    <ValidationErrors errors={errors.auth} />
+                )}
 
                 <div className="flex items-center justify-center mt-8">
                     <Button
-                        disabled={errors.throttle ? true : false}
+                        disabled={errors.throttle === null ? true : false}
                         className="block w-40"
                     >
                         ログイン
