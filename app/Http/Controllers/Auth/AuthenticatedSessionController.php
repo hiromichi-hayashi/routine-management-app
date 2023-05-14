@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): Response
+    public function show(): Response
     {
       return Inertia::render('Auth/Login');
     }
