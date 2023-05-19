@@ -29,14 +29,7 @@ const SideMenu = () => {
 
                     <div className="mt-10">
                         {routeList.map((item, index) => (
-                            <div
-                                key={index}
-                                className={`cursor-pointer h-${
-                                    item.itemLists
-                                        ? 10 * item.itemLists.length
-                                        : 10
-                                } `}
-                            >
+                            <div key={index} className="cursor-pointer">
                                 <div
                                     onClick={() => toggleItem(index)}
                                     className="pl-10 h-10 font-semibold flex items-center hover:bg-light-gray duration-300"
