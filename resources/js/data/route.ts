@@ -1,9 +1,6 @@
-export type RouteItem = {
-    title: string
-    itemLists?: string[]
-}
+import ListItems from '@/types/ListItems'
 
-export const routeList: RouteItem[] = [
+const routeList: ListItems[] = [
     { title: 'Home' },
     {
         title: 'Account',
@@ -15,6 +12,13 @@ export const routeList: RouteItem[] = [
     },
     {
         title: 'Share Routing',
-        itemLists: ['習慣化一覧', '新規習慣化作成', '習慣化項目編集'],
+        itemLists: [
+            '習慣化一覧',
+            '新規習慣化作成',
+            '習慣化項目編集',
+            '参加中習慣化一覧',
+        ],
     },
 ]
+
+export default routeList
