@@ -11,7 +11,7 @@ interface Props {
 
 const SideMenu = ({ user }: Props) => {
     return (
-        <div className="relative lg:block hidden">
+        <div className="fixed lg:block hidden">
             <div className="bg-black text-slate-200 lg:w-48 h-screen absolute left-0">
                 <div className="flex justify-center mt-3">
                     <Link href="/" className="flex items-center">
