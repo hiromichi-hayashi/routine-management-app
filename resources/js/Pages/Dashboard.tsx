@@ -16,14 +16,7 @@ interface Props {
 
 const Dashboard = ({ auth }: Props) => {
     return (
-        <Authenticated
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard
-                </h2>
-            }
-        >
+        <Authenticated user={auth.user}>
             <Head title="Dashboard" />
 
             <div className="py-12">
