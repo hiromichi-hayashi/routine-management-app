@@ -4,7 +4,7 @@ const routeList: ListItems[] = [
     { title: 'Home' },
     {
         title: 'Account',
-        itemLists: ['アカウント設定', '作業記録一覧', 'タスク一覧'],
+        itemLists: ['作業記録一覧', 'タスク一覧'],
     },
     {
         title: 'My Routing',
