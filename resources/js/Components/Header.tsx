@@ -17,22 +17,72 @@ interface Props {
 const Header = ({ user }: Props) => {
     const [isMenuTrigger, setIsMenuTrigger] = useState(false)
 
-    const menuTriggerClass = isMenuTrigger ? 'block' : 'hidden'
+    const menuTrigger = () => {
+        setIsMenuTrigger(!isMenuTrigger)
+        const body = document.querySelector('body')
+
+        if (body) {
+            isMenuTrigger
+                ? body.classList.remove('no-scroll')
+                : body.classList.add('no-scroll')
+        }
+    }
 
     return (
         <>
-            <div className="px-4 sm:px-6 shadow-md">
+            <div className="fixed max-w-7xl w-full px-4 sm:px-6 shadow-md bg-white">
                 <div className="flex justify-between h-16">
-                    <div className="flex items-center text-lg font-bold">
+                    <Link
+                        href="/"
+                        className="flex items-center text-lg font-bold"
+                    >
                         My Routimg
+                    </Link>
+                    {/* #TODO ログアウト用にのこしてありアカウント画面実装後削除 */}
+                    <div className="hidden sm:flex sm:items-center sm:ml-6">
+                        <div className="ml-3 relative">
+                            <Dropdown>
+                                <Dropdown.Trigger>
+                                    <span className="inline-flex rounded-md">
+                                        <button
+                                            type="button"
+                                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                        >
+                                            {auth.user.name}
+
+                                            <svg
+                                                className="ml-2 -mr-0.5 h-4 w-4"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clipRule="evenodd"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </Dropdown.Trigger>
+
+                                <Dropdown.Content>
+                                    <Dropdown.Link
+                                        href={route('logout')}
+                                        method="post"
+                                        as="button"
+                                    >
+                                        ログアウト
+                                    </Dropdown.Link>
+                                </Dropdown.Content>
+                            </Dropdown>
+                        </div>
                     </div>
 
                     <div className="mr-4 flex items-center">
                         <button
-                            onClick={() =>
-                                setIsMenuTrigger((prevState) => !prevState)
-                            }
-                            className="relative p-2.5 w-8 h-6 z-40 block"
+                            onClick={menuTrigger}
+                            className="relative p-2 z-40"
                         >
                             <span
                                 className={`absolute bg-black left-0 top-0 inline-block h-[2px] w-[30px] transition-all duration-[0.2s] ${
@@ -55,29 +105,37 @@ const Header = ({ user }: Props) => {
                             />
                         </button>
                     </div>
-                </div>
-            </div>
 
-            <div
-                className={`fixed inset-0 bg-black bg-opacity-50 ${menuTriggerClass}`}
-            >
-                <div
-                    className={`fixed right-0 h-screen w-64 bg-white pl-6 pt-10 text-lg`}
-                >
-                    {/* #TODO Accodionを追加 */}
-                    <div>
-                        <Link method="post" href={route('logout')} as="button">
-                            ログアウト
-                        </Link>
-                    </div>
-                    <div className="absolute bottom-[5%]">
-                        <div className="font-medium text-base text-gray-800">
-                            {user.name}
+                    {isMenuTrigger && (
+                        <div
+                            onClick={menuTrigger}
+                            className="fixed top-0 right-0 h-screen w-full bg-black bg-opacity-50"
+                        >
+                            <div
+                                onClick={(e) => e.stopPropagation()}
+                                className="fixed right-0 h-screen w-64 bg-white pl-6 pt-10 text-lg overflow-auto"
+                            >
+                                {/* #TODO Accodionを追加 */}
+                                <div>
+                                    <Link
+                                        method="post"
+                                        href={route('logout')}
+                                        as="button"
+                                    >
+                                        ログアウト
+                                    </Link>
+                                </div>
+                                <div className="absolute bottom-[5%]">
+                                    <div className="font-medium text-base text-gray-800">
+                                        {auth.user.name}
+                                    </div>
+                                    <div className="font-medium text-sm text-gray-500">
+                                        {auth.user.email}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="font-medium text-sm text-gray-500">
-                            {user.email}
-                        </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </>
