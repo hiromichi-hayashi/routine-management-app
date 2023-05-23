@@ -22,9 +22,11 @@ const Header = ({ user }: Props) => {
         const body = document.querySelector('body')
 
         if (body) {
-            isMenuTrigger
-                ? body.classList.remove('no-scroll')
-                : body.classList.add('no-scroll')
+            if (isMenuTrigger) {
+                body.classList.remove('no-scroll')
+            } else {
+                body.classList.add('no-scroll')
+            }
         }
     }
 
