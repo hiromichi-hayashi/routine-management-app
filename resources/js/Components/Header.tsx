@@ -82,12 +82,12 @@ const Header = ({ user }: Props) => {
                     <div className="mr-4 flex items-center">
                         <button
                             onClick={menuTrigger}
-                            className="relative p-2 z-40"
+                            className="relative p-2 z-40 w-8 h-5"
                         >
                             <span
                                 className={`absolute bg-black left-0 top-0 inline-block h-[2px] w-[30px] transition-all duration-[0.2s] ${
                                     isMenuTrigger
-                                        ? 'translate-y-[12px] rotate-45'
+                                        ? 'translate-y-[10px] rotate-45'
                                         : ''
                                 }`}
                             />
@@ -99,7 +99,7 @@ const Header = ({ user }: Props) => {
                                 className={`absolute bg-black left-0 bottom-0 inline-block h-[2px] w-[30px] transition-all duration-[0.2s]
                                 ${
                                     isMenuTrigger
-                                        ? '-translate-y-[10px] -rotate-45'
+                                        ? '-translate-y-[8px] -rotate-45'
                                         : ''
                                 }`}
                             />
