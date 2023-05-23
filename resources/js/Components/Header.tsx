@@ -110,32 +110,33 @@ const Header = ({ user }: Props) => {
                         <div
                             onClick={menuTrigger}
                             className="fixed top-0 right-0 h-screen w-full bg-black bg-opacity-50"
-                        >
-                            <div
-                                onClick={(e) => e.stopPropagation()}
-                                className="fixed right-0 h-screen w-64 bg-white pl-6 pt-10 text-lg overflow-auto"
+                        />
+                    )}
+
+                    <div
+                        className={`w-64 fixed right-0 h-screen bg-white pl-6 pt-10 text-lg overflow-auto duration-300 ${
+                            isMenuTrigger ? 'translate-x-0' : 'translate-x-full'
+                        }`}
+                    >
+                        {/* #TODO Accodionを追加 */}
+                        <div>
+                            <Link
+                                method="post"
+                                href={route('logout')}
+                                as="button"
                             >
-                                {/* #TODO Accodionを追加 */}
-                                <div>
-                                    <Link
-                                        method="post"
-                                        href={route('logout')}
-                                        as="button"
-                                    >
-                                        ログアウト
-                                    </Link>
-                                </div>
-                                <div className="absolute bottom-[5%]">
-                                    <div className="font-medium text-base text-gray-800">
-                                        {auth.user.name}
-                                    </div>
-                                    <div className="font-medium text-sm text-gray-500">
-                                        {auth.user.email}
-                                    </div>
-                                </div>
+                                ログアウト
+                            </Link>
+                        </div>
+                        <div className="absolute bottom-[5%]">
+                            <div className="font-medium text-base text-gray-800">
+                                {auth.user.name}
+                            </div>
+                            <div className="font-medium text-sm text-gray-500">
+                                {auth.user.email}
                             </div>
                         </div>
-                    )}
+                    </div>
                 </div>
             </div>
         </>
