@@ -123,7 +123,7 @@ return [
     'unique' => '入力された:attributeはすでに存在します。',
     'string'               => ':attributeは文字列を指定してください。',
     'timezone'             => ':attributeには、有効なゾーンを指定してください。',
-    'unique'               => ':attributeの値は既に存在しています。',
+    'unique'               => ':attributeは既に存在しています。',
     'uploaded'             => ':attributeのアップロードに失敗しました。',
     'url'                  => ':attributeに正しい形式を指定してください。',
     'uuid'                 => ':attributeに有効なUUIDを指定してください。',
