@@ -81,7 +81,8 @@ const Header = ({ user }: Props) => {
                         </div>
                     </div>
 
-                    <div className="mr-4 flex items-center">
+                    {/* TODO サイドバー実装後hiddenを削除 */}
+                    <div className="mr-4 flex items-center sm:hidden">
                         <button
                             onClick={menuTrigger}
                             className="relative p-2 z-40 w-8 h-5"
