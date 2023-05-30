@@ -3,14 +3,14 @@ import ListItems from '@/types/ListItems'
 
 interface AccordionProps {
     listItems: ListItems[]
-    titleClsddName?: string
-    itemListsClsddName?: string
+    titleClassName?: string
+    itemListsClassName?: string
 }
 
 const Accordion = ({
     listItems,
-    titleClsddName,
-    itemListsClsddName,
+    titleClassName,
+    itemListsClassName,
 }: AccordionProps) => {
     const [activeItem, setActiveItem] = useState<number[]>([])
 
@@ -23,13 +23,14 @@ const Accordion = ({
             setActiveItem((prevItems) => [...prevItems, index])
         }
     }
+
     return (
         <>
             {listItems.map((item, index) => (
                 <div key={index} className="cursor-pointer">
                     <div
                         onClick={() => toggleItem(index)}
-                        className={titleClsddName}
+                        className={titleClassName}
                     >
                         {item.title}
                     </div>
@@ -44,7 +45,7 @@ const Accordion = ({
                             {item.itemLists.map((listItem) => (
                                 <li
                                     key={listItem}
-                                    className={itemListsClsddName}
+                                    className={itemListsClassName}
                                 >
                                     {listItem}
                                 </li>

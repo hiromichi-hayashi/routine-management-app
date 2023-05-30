@@ -23,8 +23,8 @@ const SideMenu = ({ user }: Props) => {
                 <div className="mt-10">
                     <Accordion
                         listItems={routeList}
-                        titleClsddName="pl-10 h-10 font-semibold flex items-center justify-start hover:bg-light-gray duration-300"
-                        itemListsClsddName="pl-10 h-10 bg-gray hover:bg-light-gray flex items-center"
+                        titleClassName="pl-10 h-10 font-semibold flex items-center justify-start hover:bg-light-gray duration-300"
+                        itemListsClassName="pl-10 h-10 bg-gray hover:bg-light-gray flex items-center"
                     />
                 </div>
 
