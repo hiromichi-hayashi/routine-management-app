@@ -1,32 +1,24 @@
-import React, { useEffect } from 'react'
 import Button from '@/Components/Button'
 import Guest from '@/Layouts/Guest'
 import Input from '@/Components/Input'
 import Label from '@/Components/Label'
+import Link from '@/Components/Link'
 import ValidationErrors from '@/Components/ValidationErrors'
-import { Link, useForm } from '@inertiajs/inertia-react'
-import { Head } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
+import route from 'ziggy-js'
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, errors, reset } = useForm({
         name: '',
         email: '',
         password: '',
         password_confirmation: '',
     })
 
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation')
-        }
-    }, [])
-
-    const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(
             event.target.name as 'email' | 'password' | 'name',
-            event.target.type === 'checkbox'
-                ? event.target.checked + ''
-                : event.target.value
+            event.target.value
         )
     }
 
@@ -34,17 +26,19 @@ export default function Register() {
         e.preventDefault()
 
         post(route('register'))
+        reset('password', 'password_confirmation')
     }
 
     return (
         <Guest>
             <Head title="新規登録" />
 
-            <ValidationErrors errors={errors} />
-
+            <div className="text-right">
+                <Link href="login">ログインはこちら</Link>
+            </div>
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="name" value="Name" />
+                    <Label forInput="name">ユーザー名</Label>
 
                     <Input
                         type="text"
@@ -53,27 +47,31 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="name"
                         isFocused={true}
-                        handleChange={onHandleChange}
-                        required
+                        handleChange={onChange}
+                        validation={errors.name}
                     />
                 </div>
 
+                {errors && <ValidationErrors errors={errors.name} />}
+
                 <div className="mt-4">
-                    <Label forInput="email" value="Email" />
+                    <Label forInput="email">メールアドレス</Label>
 
                     <Input
-                        type="email"
+                        type="text"
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        handleChange={onHandleChange}
-                        required
+                        handleChange={onChange}
+                        validation={errors.email}
                     />
                 </div>
 
+                {errors && <ValidationErrors errors={errors.email} />}
+
                 <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                    <Label forInput="password">パスワード</Label>
 
                     <Input
                         type="password"
@@ -81,41 +79,33 @@ export default function Register() {
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        handleChange={onHandleChange}
-                        required
+                        handleChange={onChange}
+                        validation={errors.password}
                     />
                 </div>
 
+                {errors && <ValidationErrors errors={errors.password} />}
+
                 <div className="mt-4">
-                    <Label
-                        forInput="password_confirmation"
-                        value="Confirm Password"
-                    />
+                    <Label forInput="password_confirmation">
+                        パスワード(確認用)
+                    </Label>
 
                     <Input
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
-                        handleChange={onHandleChange}
-                        required
+                        handleChange={onChange}
+                        validation={errors.password_confirmation}
                     />
                 </div>
+                {errors && (
+                    <ValidationErrors errors={errors.password_confirmation} />
+                )}
 
-                <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900"
-                    >
-                        ログインはこちら
-                    </Link>
-
-                    <Button
-                        className="ml-4 bg-gray-900"
-                        processing={processing}
-                    >
-                        新規登録する
-                    </Button>
+                <div className="flex items-center justify-center mt-8 mb-3">
+                    <Button className="block w-40">新規登録</Button>
                 </div>
             </form>
         </Guest>

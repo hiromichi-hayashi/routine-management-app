@@ -1,32 +1,23 @@
-import React, { useEffect } from 'react'
 import Button from '@/Components/Button'
 import Checkbox from '@/Components/Checkbox'
 import Guest from '@/Layouts/Guest'
 import Input from '@/Components/Input'
 import Label from '@/Components/Label'
+import Link from '@/Components/Link'
 import ValidationErrors from '@/Components/ValidationErrors'
-import { Link, useForm } from '@inertiajs/inertia-react'
-import { Head } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
+import route from 'ziggy-js'
 
-interface Props {
-    status: string
-    canResetPassword: boolean
-}
-
-export default function Login({ status, canResetPassword }: Props) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+export default function Login() {
+    const { data, setData, post, errors, reset } = useForm({
         email: '',
         password: '',
+        auth: '',
+        throttle: '',
         remember: false,
     })
 
-    useEffect(() => {
-        return () => {
-            reset('password')
-        }
-    }, [])
-
-    const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setData(
             event.target.name as 'email' | 'password' | 'remember',
             event.target.type === 'checkbox'
@@ -39,46 +30,38 @@ export default function Login({ status, canResetPassword }: Props) {
         e.preventDefault()
 
         post(route('login'))
+        reset('password')
     }
 
     return (
         <Guest>
             <Head title="ログイン" />
 
-            {status && (
-                <div className="mb-4 font-medium text-sm text-green-600">
-                    {status}
-                </div>
-            )}
-
-            <ValidationErrors errors={errors} />
-
             <div className="text-right">
-                <Link
-                    href={route('register')}
-                    className="underline mb-2 text-sm text-gray-600 hover:text-gray-900"
-                >
-                    新規登録はこちら
-                </Link>
+                <Link href="register">新規登録はこちら</Link>
             </div>
 
             <form onSubmit={submit}>
                 <div>
-                    <Label forInput="email" value="Email" />
+                    <Label forInput="email">メールアドレス</Label>
 
                     <Input
                         type="text"
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="email"
                         isFocused={true}
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
+                        validation={errors.email || errors.auth}
+                        disabled={errors.throttle ? true : false}
                     />
                 </div>
 
+                {errors && <ValidationErrors errors={errors.email} />}
+
                 <div className="mt-4">
-                    <Label forInput="password" value="Password" />
+                    <Label forInput="password">パスワード</Label>
 
                     <Input
                         type="password"
@@ -86,16 +69,20 @@ export default function Login({ status, canResetPassword }: Props) {
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="current-password"
-                        handleChange={onHandleChange}
+                        handleChange={onChange}
+                        validation={errors.password || errors.auth}
+                        disabled={errors.throttle ? true : false}
                     />
                 </div>
+
+                {errors && <ValidationErrors errors={errors.password} />}
 
                 <div className="block mt-4">
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
-                            value={data.remember}
-                            handleChange={onHandleChange}
+                            checked={data.remember}
+                            handleChange={onChange}
                         />
 
                         <span className="ml-2 text-sm text-gray-600">
@@ -103,23 +90,24 @@ export default function Login({ status, canResetPassword }: Props) {
                         </span>
                     </label>
                 </div>
+                {errors && errors.throttle ? (
+                    <ValidationErrors errors={errors.throttle} />
+                ) : (
+                    <ValidationErrors errors={errors.auth} />
+                )}
 
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900"
-                        >
-                            パスワードを忘れた方はこちら
-                        </Link>
-                    )}
-
+                <div className="flex items-center justify-center mt-8">
                     <Button
-                        className="ml-4 bg-gray-900"
-                        processing={processing}
+                        disabled={errors.throttle === null ? true : false}
+                        className="block w-40"
                     >
                         ログイン
                     </Button>
+                </div>
+                <div className="text-center mt-4">
+                    <Link href="password.request">
+                        パスワードを忘れた方はこちら
+                    </Link>
                 </div>
             </form>
         </Guest>

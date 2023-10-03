@@ -8,8 +8,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 const appName =
     window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
 
-if (typeof appName != 'undefined') {
-    createInertiaApp({
+if (typeof appName !== 'undefined') {
+    void createInertiaApp({
         title: (title) => `${title} - ${appName}`,
         resolve: (name) =>
             resolvePageComponent(

@@ -1,10 +1,9 @@
-import React from 'react';
-import { Link } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/inertia-react'
 
 interface Props {
-    href: string;
-    active: boolean;
-    children: React.ReactNode;
+    href: string
+    active: boolean
+    children: React.ReactNode
 }
 
 export default function NavLink({ href, active, children }: Props) {
@@ -19,5 +18,5 @@ export default function NavLink({ href, active, children }: Props) {
         >
             {children}
         </Link>
-    );
+    )
 }

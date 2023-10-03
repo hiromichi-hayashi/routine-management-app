@@ -1,10 +1,23 @@
 import { Head } from '@inertiajs/react'
 import Authenticated from '@/Layouts/Authenticated'
 
-export default function Dashboard(props: any) {
+interface Props {
+    auth: {
+        user: {
+            created_at: string
+            email: string
+            email_verified_at?: string
+            id: number
+            name: string
+            updated_at: string
+        }
+    }
+}
+
+export default function Dashboard({ auth }: Props) {
     return (
         <Authenticated
-            auth={props.auth}
+            user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                     Dashboard

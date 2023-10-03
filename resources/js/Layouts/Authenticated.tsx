@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
-import ApplicationLogo from '@/Components/ApplicationLogo'
+import { useState } from 'react'
 import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
-import { Link } from '@inertiajs/inertia-react'
+import Link from '@/Components/Link'
+import route from 'ziggy-js'
 
 interface Props {
-    auth: any
+    user: {
+        created_at: string
+        email: string
+        email_verified_at?: string
+        id: number
+        name: string
+        updated_at: string
+    }
     header: React.ReactNode
     children: React.ReactNode
 }
 
-export default function Authenticated({ auth, header, children }: Props) {
+export default function Authenticated({ user, header, children }: Props) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false)
 
@@ -22,8 +29,12 @@ export default function Authenticated({ auth, header, children }: Props) {
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto text-gray-500" />
+                                <Link
+                                    href="/"
+                                    fontSize="text-xl"
+                                    underline={false}
+                                >
+                                    Laravel
                                 </Link>
                             </div>
 
@@ -46,7 +57,7 @@ export default function Authenticated({ auth, header, children }: Props) {
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {auth.user.name}
+                                                {user?.name}
 
                                                 <svg
                                                     className="ml-2 -mr-0.5 h-4 w-4"
@@ -65,10 +76,16 @@ export default function Authenticated({ auth, header, children }: Props) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
+                                        <div className="px-4 py-4">
+                                            <div className="font-medium text-sm text-gray-500">
+                                                {user?.email}
+                                            </div>
+                                        </div>
                                         <Dropdown.Link
-                                            href={route('logout')}
+                                            href="logout"
                                             method="post"
                                             as="button"
+                                            underline={false}
                                         >
                                             ログアウト
                                         </Dropdown.Link>
@@ -128,7 +145,7 @@ export default function Authenticated({ auth, header, children }: Props) {
                 >
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
-                            href={route('dashboard')}
+                            href={'dashboard'}
                             active={route().current('dashboard')}
                         >
                             Dashboard
@@ -138,18 +155,19 @@ export default function Authenticated({ auth, header, children }: Props) {
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800">
-                                {auth.user.name}
+                                {user?.name}
                             </div>
                             <div className="font-medium text-sm text-gray-500">
-                                {auth.user.email}
+                                {user?.email}
                             </div>
                         </div>
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink
                                 method="post"
-                                href={route('logout')}
+                                href={'logout'}
                                 as="button"
+                                underline={false}
                             >
                                 ログアウト
                             </ResponsiveNavLink>
