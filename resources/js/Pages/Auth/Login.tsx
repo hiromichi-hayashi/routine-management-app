@@ -8,7 +8,7 @@ import ValidationErrors from '@/Components/ValidationErrors'
 import { Head, useForm } from '@inertiajs/react'
 import route from 'ziggy-js'
 
-export default function Login() {
+const Login = () => {
     const { data, setData, post, errors, reset } = useForm({
         email: '',
         password: '',
@@ -90,6 +90,12 @@ export default function Login() {
                         </span>
                     </label>
                 </div>
+                <div className="mt-2 text-sm">
+                    パスワードを忘れた方は
+                    <Link href="password.request" underline>
+                        こちら
+                    </Link>
+                </div>
                 {errors && errors.throttle ? (
                     <ValidationErrors errors={errors.throttle} />
                 ) : (
@@ -104,12 +110,9 @@ export default function Login() {
                         ログイン
                     </Button>
                 </div>
-                <div className="text-center mt-4">
-                    <Link href="password.request">
-                        パスワードを忘れた方はこちら
-                    </Link>
-                </div>
             </form>
         </Guest>
     )
 }
+
+export default Login

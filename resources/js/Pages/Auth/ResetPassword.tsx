@@ -13,7 +13,7 @@ interface Props {
 
 type Name = 'email' | 'password' | 'password_confirmation' | 'token'
 
-export default function ResetPassword({ token, email }: Props) {
+const ResetPassword = ({ token, email }: Props) => {
     const { data, setData, post, errors, reset } = useForm({
         token,
         email,
@@ -97,3 +97,5 @@ export default function ResetPassword({ token, email }: Props) {
         </Guest>
     )
 }
+
+export default ResetPassword

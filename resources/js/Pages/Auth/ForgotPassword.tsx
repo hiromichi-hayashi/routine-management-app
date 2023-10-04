@@ -10,7 +10,7 @@ interface Props {
     status: string
 }
 
-export default function ForgotPassword({ status }: Props) {
+const ForgotPassword = ({ status }: Props) => {
     const { data, setData, post, errors } = useForm({
         email: '',
     })
@@ -64,3 +64,5 @@ export default function ForgotPassword({ status }: Props) {
         </Guest>
     )
 }
+
+export default ForgotPassword
