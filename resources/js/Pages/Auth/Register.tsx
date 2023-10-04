@@ -7,7 +7,7 @@ import ValidationErrors from '@/Components/ValidationErrors'
 import { Head, useForm } from '@inertiajs/react'
 import route from 'ziggy-js'
 
-export default function Register() {
+const Register = () => {
     const { data, setData, post, errors, reset } = useForm({
         name: '',
         email: '',
@@ -111,3 +111,5 @@ export default function Register() {
         </Guest>
     )
 }
+
+export default Register

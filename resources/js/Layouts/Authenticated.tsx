@@ -18,7 +18,7 @@ interface Props {
     children: React.ReactNode
 }
 
-export default function Authenticated({ user, header, children }: Props) {
+const Authenticated = ({ user, header, children }: Props) => {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false)
 
@@ -188,3 +188,5 @@ export default function Authenticated({ user, header, children }: Props) {
         </div>
     )
 }
+
+export default Authenticated

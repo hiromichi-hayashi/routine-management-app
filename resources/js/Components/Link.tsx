@@ -13,31 +13,37 @@ interface Props {
     fontSize?: string
 }
 
-export default function Link({
+const Link = ({
     as,
     className,
     href,
     method,
     children,
-    textColor,
-    underline,
-    fontSize,
-}: Props) {
+    textColor = 'text-gray-600 hover:text-gray-900',
+    underline = false,
+    fontSize = 'text-sm',
+}: Props) => {
     const sendHref: string = href === '/' ? href : route(href)
+
+    const linkClassNames = [
+        underline && 'underline',
+        fontSize,
+        textColor,
+        className,
+    ]
+        .filter(Boolean)
+        .join(' ')
 
     return (
         <InertiaLink
             as={as}
             method={method}
             href={sendHref}
-            className={[
-                underline && 'underline',
-                fontSize ?? 'text-sm',
-                textColor ?? 'text-gray-600 hover:text-gray-900',
-                className,
-            ].join(' ')}
+            className={linkClassNames}
         >
             {children}
         </InertiaLink>
     )
 }
+
+export default Link

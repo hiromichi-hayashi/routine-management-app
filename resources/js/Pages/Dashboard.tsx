@@ -14,7 +14,7 @@ interface Props {
     }
 }
 
-export default function Dashboard({ auth }: Props) {
+const Dashboard = ({ auth }: Props) => {
     return (
         <Authenticated
             user={auth.user}
@@ -38,3 +38,5 @@ export default function Dashboard({ auth }: Props) {
         </Authenticated>
     )
 }
+
+export default Dashboard

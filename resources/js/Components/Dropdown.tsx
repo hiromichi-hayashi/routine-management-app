@@ -31,10 +31,7 @@ const DropDownContext = createContext<ContextType>({} as ContextType)
 
 const Dropdown = ({ children }: Children) => {
     const [open, setOpen] = useState(false)
-
-    const toggleOpen = () => {
-        setOpen((previousState) => !previousState)
-    }
+    const toggleOpen = () => setOpen((prev) => !prev)
 
     return (
         <DropDownContext.Provider value={{ open, setOpen, toggleOpen }}>
@@ -44,21 +41,26 @@ const Dropdown = ({ children }: Children) => {
 }
 
 const Trigger = ({ children }: Children) => {
-    const { open, setOpen, toggleOpen } = useContext(DropDownContext)
-
+    const { open, toggleOpen } = useContext(DropDownContext)
     return (
         <>
             <div onClick={toggleOpen}>{children}</div>
-
-            {open && (
-                <div
-                    className="fixed inset-0"
-                    onClick={() => setOpen(false)}
-                ></div>
-            )}
+            {open && <div className="fixed inset-0" onClick={toggleOpen}></div>}
         </>
     )
 }
+
+const baseContentClasses = `
+    absolute mt-2 rounded-md shadow-lg
+`
+const baseRingClasses = `
+    rounded-md ring-1 ring-black ring-opacity-5
+`
+
+const baseDropdownLinkClasses = `
+    block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 
+    hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out
+`
 
 const Content = ({
     align = 'right',
@@ -67,46 +69,31 @@ const Content = ({
     children,
 }: ContentProps) => {
     const { open, setOpen } = useContext(DropDownContext)
+    if (!open) return null
 
-    let alignmentClasses = 'origin-top'
-
-    if (align === 'left') {
-        alignmentClasses = 'origin-top-left left-0'
-    } else if (align === 'right') {
-        alignmentClasses = 'origin-top-right right-0'
-    }
-
-    let widthClasses = ''
-
-    if (width === '48') {
-        widthClasses = 'w-48'
-    }
+    const alignmentClasses =
+        align === 'left' ? 'origin-top-left left-0' : 'origin-top-right right-0'
+    const widthClasses = width === '48' ? 'w-48' : ''
 
     return (
-        <>
-            <Transition
-                show={open}
-                enter="transition ease-out duration-200"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
+        <Transition
+            show={open}
+            enter="transition ease-out duration-200"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+        >
+            <div
+                className={`${baseContentClasses} ${alignmentClasses} ${widthClasses}`}
+                onClick={() => setOpen(false)}
             >
-                {open && (
-                    <div
-                        className={`absolute mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
-                        onClick={() => setOpen(false)}
-                    >
-                        <div
-                            className={`rounded-md ring-1 ring-black ring-opacity-5 ${contentClasses}`}
-                        >
-                            {children}
-                        </div>
-                    </div>
-                )}
-            </Transition>
-        </>
+                <div className={`${baseRingClasses} ${contentClasses}`}>
+                    {children}
+                </div>
+            </div>
+        </Transition>
     )
 }
 
@@ -122,22 +109,7 @@ const DropdownLink = ({
         as={as}
         href={href}
         underline={underline}
-        className={[
-            'block',
-            'w-full',
-            'px-4',
-            'py-2',
-            'text-left',
-            'text-sm',
-            'leading-5',
-            'text-gray-700',
-            'hover:bg-gray-100',
-            'focus:outline-none',
-            'focus:bg-gray-100',
-            'transition',
-            'duration-150',
-            'ease-in-out',
-        ].join(' ')}
+        className={baseDropdownLinkClasses}
     >
         {children}
     </Link>
