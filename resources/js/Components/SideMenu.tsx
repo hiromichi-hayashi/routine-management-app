@@ -1,8 +1,7 @@
-import { Link } from '@inertiajs/inertia-react'
+import Link from '@/Components/Link'
 import Accordion from '@/Components/Accordion'
 import Account from '@/Components/Account'
 import routeList from '@/data/route'
-import ApplicationLogo from '@/Components/ApplicationLogo'
 import User from '@/types/User'
 
 interface Props {
@@ -15,7 +14,6 @@ const SideMenu = ({ user }: Props) => {
             <div className="bg-black text-slate-200 lg:w-48 h-screen absolute left-0">
                 <div className="flex justify-center mt-3">
                     <Link href="/" className="flex items-center">
-                        <ApplicationLogo className="block h-9 w-auto fill-white" />
                         <span className="ml-3">My Routing</span>
                     </Link>
                 </div>
