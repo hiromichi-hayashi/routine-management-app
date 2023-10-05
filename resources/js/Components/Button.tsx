@@ -10,7 +10,7 @@ interface Props {
 const Button = ({
     type = 'submit',
     className = '',
-    bgColor = 'bg-gray-900 hover:bg-gray-700',
+    bgColor = 'bg-black hover:bg-gray',
     textColor = 'text-white',
     children,
     disabled,
