@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 /*
@@ -13,9 +14,52 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::fallback(function () {
+  return redirect('/home');
+});
 
-Route::get('/home', function () {
-    return Inertia::render('Home');
-})->middleware(['auth', 'verified'])->name('home');
+Route::middleware('auth')->group(function () {
+  Route::get('/home', function () {
+      return Inertia::render('Home', [
+        'user' => Auth::user(),
+    ]);
+  })->name('home');
+
+  Route::get('/todo', function () {
+    return Inertia::render('Home', [
+      'user' => Auth::user(),
+  ]);
+  })->name('todo');
+
+  Route::get('/my_routing', function () {
+    return Inertia::render('Home', [
+      'user' => Auth::user(),
+  ]);
+  })->name('my_routing');
+
+  Route::get('/share_routing', function () {
+    return Inertia::render('Home', [
+      'user' => Auth::user(),
+  ]);
+  })->name('share_routing');
+
+  Route::get('/work_log', function () {
+    return Inertia::render('Home', [
+      'user' => Auth::user(),
+  ]);
+  })->name('work_log');
+
+  Route::get('/calendar', function () {
+    return Inertia::render('Home', [
+      'user' => Auth::user(),
+  ]);
+  })->name('calendar');
+
+  Route::get('/account', function () {
+    return Inertia::render('Home', [
+      'user' => Auth::user(),
+  ]);
+  })->name('account');
+});
 
 require __DIR__.'/auth.php';

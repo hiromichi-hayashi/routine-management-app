@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
-import Tasks from '@/typs/Tasks'
+import Tasks from '@/types/Tasks'
 
 interface Props {
     items: Tasks[]
@@ -20,16 +20,16 @@ const TaskProgressChart = ({ items, className }: Props) => {
         fetchTaskData()
     }, [])
 
-    const calculateCompletionRate = () =>
-        totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100)
-
+    const calculateCompletionRate = () => {
+        return totalTasks === 0
+            ? 0
+            : Math.round((completedTasks / totalTasks) * 100)
+    }
     return (
         <>
             <div className={className}>{calculateCompletionRate()}%</div>
             <PieChart
-                data={[
-                    { title: '完了', value: completedTasks, color: '#0284c7' },
-                ]}
+                data={[{ title: '完了', value: totalTasks, color: '#49B8A7' }]}
                 startAngle={270}
                 lineWidth={25}
                 animate

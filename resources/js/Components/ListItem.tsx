@@ -1,4 +1,4 @@
-import Tasks from '@/typs/Tasks'
+import Tasks from '@/types/Tasks'
 
 interface Props {
     items: Tasks[]
@@ -14,7 +14,7 @@ const ListItem = ({ items, viewLimit }: Props) => (
             >
                 <span
                     className={`w-[4px] h-full mr-3 ${
-                        index % 2 === 0 ? 'bg-sky-400' : 'bg-sky-600'
+                        index % 2 === 0 ? 'bg-teal-400' : 'bg-teal-600'
                     }`}
                 />
                 <div className="items-center text-xl">{item.task}</div>
@@ -23,7 +23,7 @@ const ListItem = ({ items, viewLimit }: Props) => (
 
         {items.length > viewLimit && (
             <div className="w-full mt-2 flex justify-center items-center ">
-                <div className="text-slate-500 hover:text-slate-400 cursor-pointer">
+                <div className="text-black hover:text-slate-600 cursor-pointer">
                     詳しく見る...
                 </div>
             </div>

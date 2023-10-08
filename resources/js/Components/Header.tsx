@@ -1,16 +1,11 @@
 import { useState } from 'react'
-import Dropdown from '@/Components/Dropdown'
 import Link from '@/Components/Link'
-import route from 'ziggy-js'
+import Account from '@/Components/Account'
+import Accordion from '@/Components/Accordion'
+import { routeList, routeIcons } from '@/data/route'
+import User from '@/types/User'
 interface Props {
-    user: {
-        created_at: string
-        email: string
-        email_verified_at?: string
-        id: number
-        name: string
-        updated_at: string
-    }
+    user: User
 }
 
 const Header = ({ user }: Props) => {
@@ -31,34 +26,38 @@ const Header = ({ user }: Props) => {
 
     return (
         <>
-            <div className="fixed w-full px-4 sm:px-6 shadow-md bg-white">
-                <div className="flex justify-between h-16">
-                    <Link
-                        href="/"
-                        className="flex items-center text-lg font-bold"
-                    >
-                        My Routimg
-                    </Link>
+            <div className="fixed w-full px-4 sm:px-5 shadow-md bg-teal-800 z-50">
+                <div className="flex justify-between w-full h-16">
+                    <div className="flex w-36 items-center text-white font-bold">
+                        <Link href="/" fontSize="text-xl">
+                            My Routing
+                        </Link>
+                    </div>
 
-                    {/* TODO サイドバー実装後hiddenを削除 */}
-                    <div className="mr-4 flex items-center">
+                    <div className="text-white hidden lg:flex">
+                        <Account name={user.name} />
+                    </div>
+
+                    {/* ハンバーガーメニュー */}
+                    <div className="flex items-center lg:hidden">
                         <button
                             onClick={menuTrigger}
                             className="relative p-2 z-40 w-8 h-5"
                         >
                             <span
-                                className={`absolute bg-black left-0 top-0 inline-block h-[2px] w-[30px] transition-all duration-[0.2s] ${
+                                className={`absolute bg-white left-0 top-0 inline-block h-[2px] w-[30px] transition-all duration-[0.2s] 
+                                ${
                                     isMenuTrigger
                                         ? 'translate-y-[10px] rotate-45'
                                         : ''
                                 }`}
                             />
                             <span
-                                className={`absolute bg-black left-0 top-[45%] inline-block h-[2px] w-[30px] transition-all duration-[0.2s]
+                                className={`absolute bg-white left-0 top-[45%] inline-block h-[2px] w-[30px] transition-all duration-[0.2s]
                                 ${isMenuTrigger ? 'opacity-0' : ''}`}
                             />
                             <span
-                                className={`absolute bg-black left-0 bottom-0 inline-block h-[2px] w-[30px] transition-all duration-[0.2s]
+                                className={`absolute bg-white left-0 bottom-0 inline-block h-[2px] w-[30px] transition-all duration-[0.2s]
                                 ${
                                     isMenuTrigger
                                         ? '-translate-y-[8px] -rotate-45'
@@ -76,24 +75,19 @@ const Header = ({ user }: Props) => {
                     )}
 
                     <div
-                        className={`w-64 fixed right-0 h-screen bg-white pl-6 pt-10 text-lg overflow-auto duration-300 ${
+                        className={`w-64 fixed right-0 h-screen bg-teal-700 text-white overflow-auto duration-300 ${
                             isMenuTrigger ? 'translate-x-0' : 'translate-x-full'
                         }`}
                     >
-                        {/* #TODO Accodionを追加 */}
-                        <div>
-                            <Link method="post" href="logout" as="button">
-                                ログアウト
-                            </Link>
+                        <div className="px-5 py-5">
+                            <Account name={user.name} />
                         </div>
-                        <div className="absolute bottom-[5%]">
-                            <div className="font-medium text-base text-gray-800">
-                                {user.name}
-                            </div>
-                            <div className="font-medium text-sm text-gray-500">
-                                {user.email}
-                            </div>
-                        </div>
+                        <Accordion
+                            listItems={routeList}
+                            titleClassName="h-11 pl-5 pr-3 font-semibold flex items-center justify-between hover:bg-teal-500 duration-400"
+                            itemListsClassName="pl-11 h-11 font-semibold bg-teal-600 hover:bg-teal-500 flex items-center"
+                            icons={routeIcons}
+                        />
                     </div>
                 </div>
             </div>

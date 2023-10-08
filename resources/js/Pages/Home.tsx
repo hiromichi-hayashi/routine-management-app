@@ -1,16 +1,19 @@
-import { useState } from 'react'
 import { Head } from '@inertiajs/react'
-import Authenticated from '@/Layouts/Authenticated'
 import Title from '@/Components/Title'
 import Layout from '@/Layouts/Layout'
 import Panel from '@/Components/Panel'
 import ListItem from '@/Components/ListItem'
-import SelectBox from '@/Components/SelectBox'
-import { FaEdit } from 'react-icons/fa'
+import Header from '@/Components/Header'
+import SideMenu from '@/Components/SideMenu'
 import TaskProgressChart from '@/Components/TaskProgressChart'
+import User from '@/types/User'
 
-const Home = (props: any) => {
-    const [sortText, setSortText] = useState('全て')
+interface Props {
+    user: User
+}
+
+const Home = ({ user }: Props) => {
+    console.log(user)
 
     const itemData = {
         tasks: [
@@ -33,21 +36,15 @@ const Home = (props: any) => {
     }
 
     return (
-        <Authenticated
-            auth={props.auth}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Home
-                </h2>
-            }
-        >
+        <>
             <Head title="Home" />
-
+            <Header user={user} />
+            <SideMenu />
             <Layout>
                 <div className="lg:flex block lg:space-x-4">
                     <Panel>
                         <div className="mt-4 mb-8">
-                            <Title>残タスク</Title>
+                            <Title>ToDo</Title>
                         </div>
                         <ListItem
                             items={itemData.tasks.filter(
@@ -72,48 +69,8 @@ const Home = (props: any) => {
                         </div>
                     </Panel>
                 </div>
-                <Panel>
-                    <div className="mt-4 mb-8">
-                        <Title>タスク一覧</Title>
-                    </div>
-
-                    <ListItem items={itemData.tasks} viewLimit={5} />
-                </Panel>
-                <Panel>
-                    <div className="flex justify-between items-center">
-                        <div className="mt-4 mb-3">
-                            <Title>習慣化一覧</Title>
-                        </div>
-                        <div className="flex items-end text-slate-500">
-                            <FaEdit className="w-6 h-7 mr-2" />
-                            <div>新規作成</div>
-                        </div>
-                    </div>
-
-                    <SelectBox
-                        className={[
-                            'form-select',
-                            'appearance-none',
-                            'border-slate-400',
-                            'focus:border-slate-500',
-                            'focus:ring',
-                            'focus:ring-slate-300',
-                            'focus:ring-opacity-50',
-                            'rounded-md',
-                            'block',
-                            'px-3',
-                            'w-36',
-                            'py-1.5',
-                            'my-5',
-                        ].join(' ')}
-                        options={['全て', '個人習慣化', '参加用習慣化']}
-                        selectedOption={sortText}
-                        onChange={setSortText}
-                    />
-                    <ListItem items={itemData.tasks} viewLimit={5} />
-                </Panel>
             </Layout>
-        </Authenticated>
+        </>
     )
 }
 

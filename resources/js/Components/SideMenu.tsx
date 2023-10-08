@@ -1,34 +1,17 @@
-import Link from '@/Components/Link'
 import Accordion from '@/Components/Accordion'
-import Account from '@/Components/Account'
-import routeList from '@/data/route'
-import User from '@/types/User'
+import { routeList, routeIcons } from '@/data/route'
 
-interface Props {
-    user: User
-}
-
-const SideMenu = ({ user }: Props) => {
+const SideMenu = () => {
     return (
         <div className="fixed lg:block hidden">
-            <div className="bg-black text-slate-200 lg:w-48 h-screen absolute left-0">
-                <div className="flex justify-center mt-3">
-                    <Link href="/" className="flex items-center">
-                        <span className="ml-3">My Routing</span>
-                    </Link>
-                </div>
-
-                <div className="mt-10">
+            <div className="bg-teal-700 text-white text-lg lg:w-48 h-screen absolute left-0">
+                <div className="mt-16">
                     <Accordion
                         listItems={routeList}
-                        titleClassName="pl-10 h-10 font-semibold flex items-center justify-start hover:bg-light-gray duration-300"
-                        itemListsClassName="pl-10 h-10 bg-gray hover:bg-light-gray flex items-center"
+                        titleClassName="h-11 pl-5 pr-3 font-semibold flex items-center justify-between hover:bg-teal-500 duration-400"
+                        itemListsClassName="pl-11 h-11 font-semibold bg-teal-600 hover:bg-teal-500 flex items-center"
+                        listIcons={routeIcons}
                     />
-                </div>
-
-                {/* #TODO アカウント設定のリンク先を追加 */}
-                <div className="absolute bottom-[5%] h-10 w-full px-10">
-                    <Account name={user.name} email={user.email} />
                 </div>
             </div>
         </div>

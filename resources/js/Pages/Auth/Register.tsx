@@ -49,6 +49,7 @@ const Register = () => {
                         isFocused={true}
                         handleChange={onChange}
                         validation={errors.name}
+                        placeholder="ユーザー名を入力してください"
                     />
                 </div>
 
@@ -65,6 +66,7 @@ const Register = () => {
                         autoComplete="username"
                         handleChange={onChange}
                         validation={errors.email}
+                        placeholder="メールアドレスを入力してください"
                     />
                 </div>
 
@@ -81,6 +83,7 @@ const Register = () => {
                         autoComplete="new-password"
                         handleChange={onChange}
                         validation={errors.password}
+                        placeholder="パスワードを入力してください"
                     />
                 </div>
 
@@ -98,6 +101,7 @@ const Register = () => {
                         className="mt-1 block w-full"
                         handleChange={onChange}
                         validation={errors.password_confirmation}
+                        placeholder="パスワードを再入力してください"
                     />
                 </div>
                 {errors && (
