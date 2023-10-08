@@ -5,3 +5,8 @@
 body.no-scroll {
     overflow: hidden;
 }
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: ghostwhite;
+}

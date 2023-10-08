@@ -1,24 +1,97 @@
 import ListItems from '@/types/ListItems'
+import {
+    BsHouseDoor,
+    BsListCheck,
+    BsJournalCheck,
+    BsPeople,
+    BsPencilSquare,
+    BsTable,
+    BsPersonGear,
+} from 'react-icons/bs'
 
-const routeList: ListItems[] = [
-    { title: 'Home' },
+export const routeList: ListItems[] = [
     {
-        title: 'Account',
-        itemLists: ['作業記録一覧', 'タスク一覧'],
+        title: 'Home',
+        href: 'home',
+        icon: 'home',
     },
     {
-        title: 'My Routing',
-        itemLists: ['習慣化一覧', '新規習慣化作成', '習慣化項目編集'],
-    },
-    {
-        title: 'Share Routing',
+        title: 'ToDo',
+        href: 'todo',
+        icon: 'todo',
         itemLists: [
-            '習慣化一覧',
-            '新規習慣化作成',
-            '習慣化項目編集',
-            '参加中習慣化一覧',
+            {
+                href: 'home',
+                title: 'ToDo一覧',
+            },
+        ],
+    },
+    {
+        title: 'MyRouting',
+        href: 'my_routing',
+        icon: 'myRouting',
+        itemLists: [
+            { href: 'home', title: '新規作成' },
+            {
+                href: 'home',
+                title: '自分の習慣一覧',
+            },
+        ],
+    },
+    {
+        title: 'ShareRouting',
+        href: 'share_routing',
+        icon: 'shareRouting',
+        itemLists: [
+            {
+                href: 'home',
+                title: 'みんなの習慣一覧',
+            },
+        ],
+    },
+    {
+        title: '作業記録',
+        href: 'work_log',
+        icon: 'workLog',
+        itemLists: [
+            {
+                href: 'home',
+                title: '作業記録一覧',
+            },
+        ],
+    },
+    {
+        title: 'カレンダー',
+        href: 'calendar',
+        icon: 'calendar',
+    },
+    {
+        title: '設定',
+        href: 'account',
+        icon: 'account',
+        itemLists: [
+            {
+                href: 'home',
+                title: 'アカウント設定',
+            },
+            {
+                href: 'home',
+                title: '通知設定',
+            },
+            {
+                href: 'logout',
+                title: 'ログアウト',
+            },
         ],
     },
 ]
 
-export default routeList
+export const routeIcons = {
+    home: BsHouseDoor,
+    todo: BsListCheck,
+    myRouting: BsJournalCheck,
+    shareRouting: BsPeople,
+    workLog: BsPencilSquare,
+    calendar: BsTable,
+    account: BsPersonGear,
+}

@@ -35,11 +35,11 @@ const Input = ({
         if (isFocused && input.current) {
             input.current.focus()
         }
-    }, [isFocused]) // 明確なフックの依存関係を追加
+    }, [isFocused])
 
     const inputClasses = `
+        focus:border-gray focus:ring-gray rounded-md shadow-sm
         ${validation ? 'border-red-400' : 'border-gray-300'}
-        focus:border-gray-500 focus:ring-gray-500 rounded-md shadow-sm
         ${disabled ? 'bg-slate-200 text-gray-500' : ''}
         ${className || ''} 
     `
@@ -57,7 +57,7 @@ const Input = ({
                 ref={input}
                 autoComplete={autoComplete}
                 required={required}
-                onChange={handleChange} // 直接イベントハンドラをアタッチ
+                onChange={handleChange}
             />
         </div>
     )
