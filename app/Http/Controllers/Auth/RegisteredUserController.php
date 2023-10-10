@@ -30,11 +30,22 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
+        $icons = [
+          'blue-cute-little-monster-baby-teeth.svg',
+          'cute-baby-monster-with-smile-and-cute-horns.svg',
+          'green-cute-monster-with-baby-teeth.svg',
+          'huge-monster-with-baby-teeth.svg',
+          'kid-robot-monster-with-huge-smile-and-one-eye-and-horn.svg',
+          'skinny-green-monster-with-big-legs-and-one-eye.svg',
+          'three-eye-robot-monster.svg',
+          'two-horn-one-eye-pink-monster.svg'
+        ];
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'icon' => $icons[array_rand($icons)],
         ]);
 
         event(new Registered($user));

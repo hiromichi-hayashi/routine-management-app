@@ -1,18 +1,16 @@
-// Todo: アカウント画像をランダムで当てる
-import icon from '../../images/icons/cute-purple-monster-with-two-horns-and-cute-teeth.svg'
-
 interface Props {
     name: string
+    icon: string
 }
 
-const Account = ({ name }: Props) => {
+const Account = ({ name, icon }: Props) => {
     return (
         <>
             <div className="lg:flex space-y-1 lg:space-y-0">
                 <div className="lg:mt-3">
                     <img
-                        src={icon}
-                        alt=""
+                        src={`/images/icons/${icon}`}
+                        alt={icon}
                         className="rounded-full w-8 lg:w-10 h-8 bg-white"
                     />
                 </div>

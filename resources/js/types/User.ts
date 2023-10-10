@@ -5,4 +5,5 @@ export default interface User {
     id: number
     name: string
     updated_at: string
+    icon: string
 }

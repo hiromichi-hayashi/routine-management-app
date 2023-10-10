@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+      Schema::create('users', function (Blueprint $table) {
+          $table->id();
+          $table->string('name', 20)->comment('ユーザー名');
+          $table->string('email', 256)->unique()->comment('メールアドレス');
+          $table->string('password', 128)->comment('パスワード');
+          $table->string('icon')->nullable()->comment('アイコン');
+          $table->rememberToken()->comment('記憶トークン');
+          $table->timestamps();
+
+          // index
+          $table->index('email');
+      });
     }
 
     /**
