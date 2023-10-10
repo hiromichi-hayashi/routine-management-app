@@ -9,7 +9,7 @@ const SideMenu = () => {
                     <Accordion
                         listItems={routeList}
                         titleClassName="h-11 pl-5 pr-3 font-semibold flex items-center justify-between hover:bg-teal-500 duration-400"
-                        itemListsClassName="pl-11 h-11 font-semibold bg-teal-600 hover:bg-teal-500 flex items-center"
+                        itemListsClassName="pl-11 h-11 w-full font-semibold bg-teal-600 hover:bg-teal-500 flex items-center"
                         listIcons={routeIcons}
                     />
                 </div>

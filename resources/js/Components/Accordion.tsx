@@ -71,6 +71,11 @@ const Accordion = ({
                         >
                             {item.itemLists.map((listItem) => (
                                 <Link
+                                    as={
+                                        listItem.href === 'logout'
+                                            ? 'button'
+                                            : 'a'
+                                    }
                                     key={listItem.title}
                                     href={listItem.href}
                                     method={
