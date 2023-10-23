@@ -5,15 +5,14 @@ interface Props {
 }
 
 const Checkbox = ({ name, checked, handleChange }: Props) => {
-    // クラス名を予めグループ化
     const classNames = [
         'rounded',
         'border-gray-300',
-        'text-indigo-600',
+        'text-gray',
         'shadow-sm',
-        'focus:border-indigo-300',
+        'focus:border-gray',
         'focus:ring',
-        'focus:ring-indigo-200',
+        'focus:ring-gray',
         'focus:ring-opacity-50',
     ].join(' ')
 

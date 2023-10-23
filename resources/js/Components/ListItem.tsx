@@ -21,6 +21,7 @@ const ListItem = ({ items, viewLimit }: Props) => (
             </div>
         ))}
 
+        {/* TODO: Linkに変更 */}
         {items.length > viewLimit && (
             <div className="w-full mt-2 flex justify-center items-center ">
                 <div className="text-black hover:text-slate-600 cursor-pointer">

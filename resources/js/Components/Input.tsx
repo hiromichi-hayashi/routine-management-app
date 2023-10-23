@@ -11,7 +11,7 @@ interface InputProps {
     required?: boolean
     isFocused?: boolean
     handleChange: React.ChangeEventHandler<HTMLInputElement>
-    validation: string | undefined
+    validation?: string
     disabled?: boolean
 }
 
@@ -50,7 +50,7 @@ const Input = ({
                 type={type}
                 name={name}
                 value={value}
-                max={max}
+                maxLength={max}
                 disabled={disabled}
                 placeholder={placeholder}
                 className={inputClasses.trim()}

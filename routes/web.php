@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HabitController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -31,17 +33,21 @@ Route::middleware('auth')->group(function () {
   ]);
   })->name('todo');
 
-  Route::get('/my_routing', function () {
-    return Inertia::render('Home', [
-      'user' => Auth::user(),
-  ]);
-  })->name('my_routing');
+  Route::post('/todo_store', [TodoController::class, 'store'])->name('todo.store');
 
-  Route::get('/share_routing', function () {
+  Route::get('/my_habit', function () {
     return Inertia::render('Home', [
       'user' => Auth::user(),
   ]);
-  })->name('share_routing');
+  })->name('my_habit');
+
+  Route::get('/habit_create', [HabitController::class, 'create'])->name('habit.create');
+
+  Route::get('/share_habit', function () {
+    return Inertia::render('Home', [
+      'user' => Auth::user(),
+  ]);
+  })->name('share_habit');
 
   Route::get('/work_log', function () {
     return Inertia::render('Home', [

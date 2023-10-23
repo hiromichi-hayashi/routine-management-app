@@ -28,10 +28,10 @@ export const routeList: ListItems[] = [
     },
     {
         title: 'MyRouting',
-        href: 'my_routing',
+        href: 'my_habit',
         icon: 'myRouting',
         itemLists: [
-            { href: 'home', title: '新規作成' },
+            { href: 'habit.create', title: '新規作成' },
             {
                 href: 'home',
                 title: '自分の習慣一覧',
@@ -40,7 +40,7 @@ export const routeList: ListItems[] = [
     },
     {
         title: 'ShareRouting',
-        href: 'share_routing',
+        href: 'share_habit',
         icon: 'shareRouting',
         itemLists: [
             {

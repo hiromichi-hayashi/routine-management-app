@@ -105,7 +105,7 @@ const Login = () => {
                 <div className="flex items-center justify-center mt-8">
                     <Button
                         disabled={errors.throttle === null ? true : false}
-                        className="block w-40"
+                        className="block w-40 py-2"
                     >
                         ログイン
                     </Button>
