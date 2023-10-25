@@ -17,7 +17,7 @@ const HabitTodoList = ({ items, className, onEditClick }: Props) => (
                     }`}
                 />
                 <div className="w-full flex justify-between items-center cursor-pointer">
-                    {item.title}
+                    <span className="flex-grow break-words">{item.title}</span>
                     <BsPencilSquare
                         className="mr-4"
                         onClick={() => onEditClick && onEditClick(index)}

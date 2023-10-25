@@ -14,24 +14,24 @@ return new class extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-          $table->id();
-          $table->unsignedBigInteger('user_id')->comment('ユーザーID');
-          $table->unsignedBigInteger('habit_id')->nullable()->comment('習慣化ID');
-          $table->string('title', 256)->comment('タイトル');
-          $table->time('work_time')->nullable()->comment('作業時間');
-          $table->text('work_description')->nullable()->comment('作業内容');
-          $table->boolean('status')->default(false)->comment('ステータス');
-          $table->timestamps();
+            $table->id();
+            $table->unsignedBigInteger('user_id')->comment('ユーザーID');
+            $table->unsignedBigInteger('habit_id')->comment('習慣化ID');
+            $table->string('title', 50)->comment('タイトル');
+            $table->time('work_time')->nullable()->comment('作業時間');
+            $table->text('work_description', 500)->nullable()->comment('作業内容');
+            $table->boolean('status')->default(false)->comment('ステータス');
+            $table->timestamps();
 
-          // 外部キー制約
-          $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-          $table->foreign('habit_id')->references('id')->on('habits')->onDelete('cascade');
+            // 外部キー制約
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('habit_id')->references('id')->on('habits')->onDelete('cascade');
 
-          // index
-          $table->index('user_id');
-          $table->index('habit_id');
-          $table->index('created_at');
-          $table->index('updated_at');
+            // index
+            $table->index('user_id');
+            $table->index('habit_id');
+            $table->index('created_at');
+            $table->index('updated_at');
         });
     }
 

@@ -28,8 +28,12 @@ const Header = ({ user }: Props) => {
         <>
             <div className="fixed w-full px-4 sm:px-5 shadow-md bg-teal-800 z-50">
                 <div className="flex justify-between w-full h-16">
-                    <div className="flex w-36 items-center text-white font-bold">
-                        <Link href="/" fontSize="text-xl">
+                    <div className="flex w-36 items-center  font-bold">
+                        <Link
+                            href="/"
+                            fontSize="text-xl"
+                            textColor="text-white"
+                        >
                             My Routing
                         </Link>
                     </div>

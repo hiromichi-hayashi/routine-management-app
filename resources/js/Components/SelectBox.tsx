@@ -1,13 +1,17 @@
-import { useEffect, useRef } from 'react'
+import Select, {
+    ValueType,
+    OptionTypeBase,
+    StylesConfig,
+    ActionMeta,
+} from 'react-select'
 
 interface Props {
     name: string
     value: string
-    options: { [key: string]: string[] }
+    options: { [key: string]: string }
     className?: string
     required?: boolean
-    isFocused?: boolean
-    handleChange: React.ChangeEventHandler<HTMLSelectElement>
+    handleChange: (value: string) => void
     validation: string | undefined
 }
 
@@ -16,41 +20,48 @@ const SelectBox = ({
     value,
     options,
     className,
-    required,
-    isFocused,
     handleChange,
     validation,
 }: Props) => {
-    const selectRef = useRef<HTMLSelectElement>(null)
+    const formattedOptions = Object.entries(options).map(([key, val]) => ({
+        value: key,
+        label: val,
+    }))
 
-    useEffect(() => {
-        if (isFocused && selectRef.current) {
-            selectRef.current.focus()
+    const customStyles: StylesConfig<OptionTypeBase, false> = {
+        control: (provided, state) => ({
+            ...provided,
+            borderColor: validation ? 'red' : 'gray',
+            boxShadow: state.isFocused ? '0 0 0 1px' : 'none',
+            '&:hover': {
+                borderColor: validation ? 'red' : 'gray',
+            },
+        }),
+    }
+
+    const handleOptionChange = (
+        option: ValueType<OptionTypeBase, false>,
+        action: ActionMeta<OptionTypeBase>
+    ) => {
+        if (action.action === 'select-option') {
+            handleChange((option as { value: string }).value)
         }
-    }, [isFocused])
+    }
 
-    const selectClasses = `
-        focus:border-gray focus:ring-gray rounded-md shadow-sm
-        ${validation ? 'border-red-400' : 'border-gray-300'}
-        ${className || ''} 
-    `
+    const selectedValue =
+        formattedOptions.find((opt) => opt.value === value) || null
 
     return (
         <div className="flex flex-col items-start">
-            <select
+            <Select
                 name={name}
-                value={value}
-                className={selectClasses}
-                ref={selectRef}
-                required={required}
-                onChange={handleChange}
-            >
-                {Object.entries(options).map(([key, val]) => (
-                    <option key={key} value={key}>
-                        {val}
-                    </option>
-                ))}
-            </select>
+                value={selectedValue}
+                options={formattedOptions}
+                className={className}
+                styles={customStyles}
+                isSearchable={false}
+                onChange={handleOptionChange}
+            />
         </div>
     )
 }

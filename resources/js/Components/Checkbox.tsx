@@ -7,7 +7,7 @@ interface Props {
 const Checkbox = ({ name, checked, handleChange }: Props) => {
     const classNames = [
         'rounded',
-        'border-gray-300',
+        'border-gray',
         'text-gray',
         'shadow-sm',
         'focus:border-gray',

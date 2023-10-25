@@ -20,7 +20,7 @@ import User from '@/types/User'
 import Todos from '@/types/Todo'
 
 interface ValueMap {
-    [key: string]: string[]
+    [key: string]: string
 }
 
 interface Props {
@@ -50,6 +50,20 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
         setData('todos', newTodos)
     }, [newTodos])
 
+    const modalTrigger = (isOpen: boolean) => {
+        setIsModalTrigger(isOpen)
+        const body = document.querySelector('body')
+
+        if (body) {
+            if (isOpen) {
+                body.classList.add('no-scroll')
+            } else {
+                body.classList.remove('no-scroll')
+                setData('todos', newTodos)
+            }
+        }
+    }
+
     const handleEditTodo = (index: number) => {
         setEditingTodoIndex(index)
         modalTrigger(true)
@@ -65,24 +79,9 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
         setEditingTodoIndex(null)
     }
 
-    const modalTrigger = (isOpen: boolean) => {
-        setIsModalTrigger(isOpen)
-        const body = document.querySelector('body')
-
-        if (body) {
-            if (isOpen) {
-                body.classList.add('no-scroll')
-            } else {
-                body.classList.remove('no-scroll')
-                setData('todos', newTodos)
-            }
-        }
-    }
-
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log({ data, categories, difficulties, task_types })
-        // post(route('habits.store'))
+        post(route('habit.store'))
     }
 
     return (
@@ -129,6 +128,7 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
                             }
                             validation={errors.title}
                             placeholder="タイトル"
+                            max={50}
                         />
                         <ValidationErrors errors={errors.title} />
 
@@ -145,12 +145,13 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
                                 name="category"
                                 value={data.category}
                                 className="mt-2 block w-44"
-                                handleChange={(e) =>
-                                    setData('category', e.target.value)
+                                handleChange={(selectedValue) =>
+                                    setData('category', selectedValue)
                                 }
                                 options={categories}
                                 validation={errors.category}
                             />
+
                             <ValidationErrors errors={errors.category} />
                         </div>
 
@@ -167,8 +168,8 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
                                 name="difficulty"
                                 value={data.difficulty}
                                 className="mt-2 block w-44"
-                                handleChange={(e) =>
-                                    setData('difficulty', e.target.value)
+                                handleChange={(selectedValue) =>
+                                    setData('difficulty', selectedValue)
                                 }
                                 options={difficulties}
                                 validation={errors.difficulty}
@@ -189,8 +190,8 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
                                 name="task_type"
                                 value={data.task_type}
                                 className="mt-3 block w-44"
-                                handleChange={(e) =>
-                                    setData('task_type', e.target.value)
+                                handleChange={(selectedValue) =>
+                                    setData('task_type', selectedValue)
                                 }
                                 options={task_types}
                                 validation={errors.task_type}
@@ -204,7 +205,7 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
                                 className="mt-5 font-semibold"
                                 fontSize="text-base"
                             >
-                                説明
+                                習慣化説明
                             </Label>
                             <textarea
                                 name="description"
@@ -213,6 +214,7 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
                                 onChange={(e) =>
                                     setData('work_description', e.target.value)
                                 }
+                                maxLength={500}
                             />
                         </div>
 
@@ -251,6 +253,7 @@ const Create = ({ categories, difficulties, task_types, user }: Props) => {
                                     />
                                 </div>
                             </div>
+                            <ValidationErrors errors={errors.todos} />
                         </div>
 
                         {data.task_type === 'habit_task' && (

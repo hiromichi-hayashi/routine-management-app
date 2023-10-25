@@ -58,6 +58,7 @@ const Accordion = ({
                                 href={item.href}
                                 fontSize="text-base"
                                 className="flex items-center pl-2 text-base w-full"
+                                textColor="text-white"
                             >
                                 {item.title}
                             </Link>
@@ -87,6 +88,7 @@ const Accordion = ({
                                     }
                                     fontSize="text-base"
                                     className={itemListsClassName}
+                                    textColor="text-white"
                                 >
                                     {listItem.title}
                                 </Link>

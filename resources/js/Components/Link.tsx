@@ -19,7 +19,7 @@ const Link = ({
     href,
     method,
     children,
-    textColor = 'text-gray-600 hover:text-gray-900',
+    textColor = 'text-gray hover:text-light-gray',
     underline = false,
     fontSize = 'text-sm',
 }: Props) => {

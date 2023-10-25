@@ -85,7 +85,7 @@ const Login = () => {
                             handleChange={onChange}
                         />
 
-                        <span className="ml-2 text-sm text-gray-600">
+                        <span className="ml-2 text-sm text-gray">
                             ログイン情報を記憶する
                         </span>
                     </label>

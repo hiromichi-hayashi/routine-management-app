@@ -39,8 +39,8 @@ const Input = ({
 
     const inputClasses = `
         focus:border-gray focus:ring-gray rounded-md shadow-sm
-        ${validation ? 'border-red-400' : 'border-gray-300'}
-        ${disabled ? 'bg-slate-200 text-gray-500' : ''}
+        ${validation ? 'border-red-400' : 'border-gray'}
+        ${disabled ? 'bg-slate-200 text-light-gray' : ''}
         ${className || ''} 
     `
 

@@ -1,4 +1,3 @@
-import Button from '@/Components/Button'
 import { BsXLg } from 'react-icons/bs'
 
 interface Props {

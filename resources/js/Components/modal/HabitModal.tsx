@@ -5,8 +5,18 @@ import ValidationErrors from '@/Components/ValidationErrors'
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
 import Label from '@/Components/Label'
-import axios from 'axios'
+import axios, { AxiosResponse, AxiosError } from 'axios'
 import Todos from '@/types/Todo'
+
+interface Errors {
+    title?: string
+    work_time?: string
+    work_description?: string
+}
+
+interface ErrorResponse {
+    errors: Errors
+}
 
 interface Props {
     handleClose: (isOpen: boolean, updatedTodo?: Todos) => void
@@ -26,12 +36,12 @@ const HabitModal = ({
     const [data, setData] = useState(
         initialTodo || {
             title: '',
-            work_time: '',
+            work_time: '00:00',
             work_description: '',
         }
     )
 
-    const [errors, setErrors] = useState({
+    const [errors, setErrors] = useState<Errors>({
         title: '',
         work_time: '',
         work_description: '',
@@ -53,8 +63,8 @@ const HabitModal = ({
         }
 
         axios
-            .post(route('todo.store'), formattedData)
-            .then((response) => {
+            .post<Todos>(route('todo.store'), formattedData)
+            .then((response: AxiosResponse<Todos>) => {
                 if (response.status === 200 || response.status === 201) {
                     // 成功時にtodosにデータを追加
                     if (editingIndex !== null) {
@@ -69,16 +79,22 @@ const HabitModal = ({
                     handleClose(false)
                 }
             })
-            .catch((error) => {
+            .catch((error: AxiosError<ErrorResponse>) => {
                 if (
                     error.response &&
                     error.response.status === 422 &&
                     error.response.data.errors
                 ) {
-                    setErrors(error.response.data.errors)
+                    setErrors({
+                        title: error.response.data.errors.title?.[0],
+                        work_time: error.response.data.errors.work_time?.[0],
+                        work_description:
+                            error.response.data.errors.work_description?.[0],
+                    })
                 }
             })
     }
+
     return (
         <Modal title="新規作成" handleClose={() => handleClose(false)}>
             <form onSubmit={submit}>
@@ -105,6 +121,7 @@ const HabitModal = ({
                         }
                         validation={errors.title}
                         placeholder="タイトル"
+                        max={50}
                     />
                     <ValidationErrors errors={errors.title} />
                     <Label
@@ -138,14 +155,21 @@ const HabitModal = ({
                     <textarea
                         name="description"
                         value={data.work_description}
-                        className="mt-2 block w-full h-28 lg:h-40 focus:border-gray focus:ring-gray rounded-md shadow-sm"
+                        className={`mt-2 block w-full h-28 lg:h-40 focus:border-gray focus:ring-gray rounded-md shadow-sm
+                        ${
+                            errors.work_description
+                                ? 'border-red-400'
+                                : 'border-gray'
+                        }`}
                         onChange={(e) =>
                             setData((prevData) => ({
                                 ...prevData,
                                 work_description: e.target.value,
                             }))
                         }
+                        maxLength={500}
                     />
+                    <ValidationErrors errors={errors.work_description} />
                     <div className="mt-5 w-full flex items-center justify-center">
                         <Button className="block w-40 py-2">作成</Button>
                     </div>

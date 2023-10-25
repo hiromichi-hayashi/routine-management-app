@@ -14,7 +14,7 @@ const Label = ({
     return (
         <label
             htmlFor={forInput}
-            className={`block font-medium text-gray-700 ${className} ${fontSize}`}
+            className={`block font-medium text-gray ${className} ${fontSize}`}
         >
             {children}
         </label>
