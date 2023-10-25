@@ -109,7 +109,7 @@ const Register = () => {
                 )}
 
                 <div className="flex items-center justify-center mt-8 mb-3">
-                    <Button className="block w-40">新規登録</Button>
+                    <Button className="block w-40 py-2">新規登録</Button>
                 </div>
             </form>
         </Guest>

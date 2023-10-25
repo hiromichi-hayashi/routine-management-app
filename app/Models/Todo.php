@@ -19,11 +19,19 @@ class Todo extends Model
         'user_id',
         'habit_id',
         'title',
-        'task_type',
-        'category',
         'work_time',
         'work_description',
         'status',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'created_at',
+        'updated_at',
     ];
 
     /**

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TodoRequest;
+use Illuminate\Http\JsonResponse;
+
 
 class TodoController extends Controller
 {
@@ -32,9 +35,11 @@ class TodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TodoRequest $request): JsonResponse
     {
-        //
+        return response()->json([
+            'message' => '作業項目を追加しました'
+        ], 201);
     }
 
     /**

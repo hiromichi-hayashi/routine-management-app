@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HabitController;
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 /*
@@ -15,51 +17,56 @@ use Inertia\Inertia;
 |
 */
 Route::fallback(function () {
-  return redirect('/home');
+    return redirect('/home');
 });
 
 Route::middleware('auth')->group(function () {
-  Route::get('/home', function () {
-      return Inertia::render('Home', [
-        'user' => Auth::user(),
-    ]);
-  })->name('home');
+    Route::get('/home', function () {
+        return Inertia::render('Home', [
+            'user' => Auth::user(),
+        ]);
+    })->name('home');
 
-  Route::get('/todo', function () {
-    return Inertia::render('Home', [
-      'user' => Auth::user(),
-  ]);
-  })->name('todo');
+    Route::get('/todo', function () {
+        return Inertia::render('Home', [
+            'user' => Auth::user(),
+        ]);
+    })->name('todo');
 
-  Route::get('/my_routing', function () {
-    return Inertia::render('Home', [
-      'user' => Auth::user(),
-  ]);
-  })->name('my_routing');
+    Route::post('/todo/store', [TodoController::class, 'store'])->name('todo.store');
 
-  Route::get('/share_routing', function () {
-    return Inertia::render('Home', [
-      'user' => Auth::user(),
-  ]);
-  })->name('share_routing');
+    Route::get('/habit/create', [HabitController::class, 'create'])->name('habit.create');
+    Route::post('/habit/store', [HabitController::class, 'store'])->name('habit.store');
 
-  Route::get('/work_log', function () {
-    return Inertia::render('Home', [
-      'user' => Auth::user(),
-  ]);
-  })->name('work_log');
+    Route::get('/my_habit', function () {
+        return Inertia::render('Home', [
+            'user' => Auth::user(),
+        ]);
+    })->name('my_habit');
 
-  Route::get('/calendar', function () {
-    return Inertia::render('Home', [
-      'user' => Auth::user(),
-  ]);
-  })->name('calendar');
+    Route::get('/share_habit', function () {
+        return Inertia::render('Home', [
+            'user' => Auth::user(),
+        ]);
+    })->name('share_habit');
 
-  Route::get('/account', function () {
-    return Inertia::render('Home', [
-      'user' => Auth::user(),
-  ]);
-  })->name('account');
+    Route::get('/work_log', function () {
+        return Inertia::render('Home', [
+            'user' => Auth::user(),
+        ]);
+    })->name('work_log');
+
+    Route::get('/calendar', function () {
+        return Inertia::render('Home', [
+            'user' => Auth::user(),
+        ]);
+    })->name('calendar');
+
+    Route::get('/account', function () {
+        return Inertia::render('Home', [
+            'user' => Auth::user(),
+        ]);
+    })->name('account');
 });
 
 require __DIR__.'/auth.php';

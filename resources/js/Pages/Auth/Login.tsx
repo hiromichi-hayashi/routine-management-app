@@ -85,7 +85,7 @@ const Login = () => {
                             handleChange={onChange}
                         />
 
-                        <span className="ml-2 text-sm text-gray-600">
+                        <span className="ml-2 text-sm text-gray">
                             ログイン情報を記憶する
                         </span>
                     </label>
@@ -105,7 +105,7 @@ const Login = () => {
                 <div className="flex items-center justify-center mt-8">
                     <Button
                         disabled={errors.throttle === null ? true : false}
-                        className="block w-40"
+                        className="block w-40 py-2"
                     >
                         ログイン
                     </Button>

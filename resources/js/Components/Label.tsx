@@ -1,14 +1,20 @@
 interface Props {
     forInput: string
     className?: string
+    fontSize?: string
     children: React.ReactNode
 }
 
-const Label = ({ forInput, className = '', children }: Props) => {
+const Label = ({
+    forInput,
+    className = '',
+    fontSize = 'text-sm',
+    children,
+}: Props) => {
     return (
         <label
             htmlFor={forInput}
-            className={`block font-medium text-sm text-gray-700 ${className}`}
+            className={`block font-medium text-gray ${className} ${fontSize}`}
         >
             {children}
         </label>

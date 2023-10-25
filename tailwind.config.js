@@ -18,9 +18,25 @@ module.exports = {
                 'light-gray': '#6F737A',
                 gray: '#4C4D4E',
                 black: '#202123',
+                ghostwhite: 'ghostwhite',
             },
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [
+        require('@tailwindcss/forms'),
+
+        function ({ addUtilities }) {
+            const newUtilities = {
+                '.no-scrollbar::-webkit-scrollbar': {
+                    display: 'none',
+                },
+                '.no-scrollbar': {
+                    '-ms-overflow-style': 'none',
+                    'scrollbar-width': 'none',
+                },
+            }
+            addUtilities(newUtilities, ['responsive', 'hover'])
+        },
+    ],
 }

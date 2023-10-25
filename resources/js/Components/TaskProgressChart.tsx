@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { PieChart } from 'react-minimal-pie-chart'
-import Tasks from '@/types/Tasks'
+import Tasks from '@/types/Todo'
 
 interface Props {
     items: Tasks[]

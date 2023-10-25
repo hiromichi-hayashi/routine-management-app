@@ -56,9 +56,9 @@ const ForgotPassword = ({ status }: Props) => {
 
                 <div className="flex items-center justify-center mt-4">
                     <Link href="login" textColor="text-white" underline={false}>
-                        <Button className="bg-gray-900">戻る</Button>
+                        <Button className="w-20 py-2">戻る</Button>
                     </Link>
-                    <Button className="ml-4 bg-gray-900">送信</Button>
+                    <Button className="ml-4 w-20 py-2">送信</Button>
                 </div>
             </form>
         </Guest>

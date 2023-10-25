@@ -53,12 +53,15 @@ const Accordion = ({
                         </div>
                     ) : (
                         <div className={titleClassName}>
-                            <div className="flex items-center space-x-2 text-base">
-                                {createElement(listIcons[item.icon])}
-                                <Link href={item.href} fontSize="text-base">
-                                    {item.title}
-                                </Link>
-                            </div>
+                            {createElement(listIcons[item.icon])}
+                            <Link
+                                href={item.href}
+                                fontSize="text-base"
+                                className="flex items-center pl-2 text-base w-full"
+                                textColor="text-white"
+                            >
+                                {item.title}
+                            </Link>
                         </div>
                     )}
                     {item.itemLists && (
@@ -85,6 +88,7 @@ const Accordion = ({
                                     }
                                     fontSize="text-base"
                                     className={itemListsClassName}
+                                    textColor="text-white"
                                 >
                                     {listItem.title}
                                 </Link>
